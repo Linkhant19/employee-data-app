@@ -1,6 +1,7 @@
 // types.ts
 
 export type EmployeeProps = {
+    id: string;
     name: string;
     salary: number;
     absences: number;
