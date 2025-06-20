@@ -1,16 +1,17 @@
+// lib/addNewEmployee.ts
+
 "use server";
 import getCollection, {DATA_COLLECTION} from "@/db";
 import {EmployeeProps} from "@/types"
 
 export default async function addNewEmployee(
-    id: string,
-    name:string,
+    name: string,
+    salary: number,
 ): Promise<EmployeeProps> {
     console.log("Adding New Employee");
     const e = {
-        id: id,
         name: name,
-        salary: 0,
+        salary: salary,
         absences: 0,
         otdays: 0,
         othours: 0,
