@@ -1,6 +1,6 @@
-// app/post/[id]/page.tsx
+// app/employee/[id]/page.tsx
 
-import EmployeePreview from "@/components/employee-preview";
+import FullEmployee from "@/components/full-employee";
 import getEmployeeById from "@/lib/getEmployeeById";
 import { redirect } from "next/navigation";
 
@@ -19,7 +19,7 @@ export default async function FullEmployeePage({ params,
 
         return (
             <div>
-                <EmployeePreview person={employee} />
+                <FullEmployee person={employee} />
             </div>
         );
     } catch (error) {
