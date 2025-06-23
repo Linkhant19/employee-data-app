@@ -1,4 +1,4 @@
-// app/employee/[id]/page.tsx
+// app/employees/[id]/page.tsx
 
 import FullEmployee from "@/components/full-employee";
 import getEmployeeById from "@/lib/getEmployeeById";
