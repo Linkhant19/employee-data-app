@@ -4,8 +4,8 @@
 
 import { useState } from "react";
 import { EmployeeProps } from "@/types";
-import updateName from "@/lib/updateName";
-import UpdateNameForm from "@/components/update-name-form";
+import updateName from "@/lib/updateFunctions/updateName";
+import UpdateNameForm from "@/components/forms/update-name-form";
 
 export default function FullEmployee({ person }: { person: EmployeeProps }) {
     const [showForm, setShowForm] = useState(false);
