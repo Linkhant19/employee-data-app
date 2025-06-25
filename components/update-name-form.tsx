@@ -2,31 +2,38 @@
 
 "use client";
 
-import {Button, TextField} from "@mui/material";
-import updateName from "@/lib/updateName";
-import {useState} from 'react';
-import { EmployeeProps } from "@/types";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function UpdateNameForm({append}: {append: EmployeeProps }) {
+export default function UpdateNameForm({
+    action,
+    id,
+}: {
+    action: (formData: FormData) => Promise<void>;
+    id: string;
+}) {
     const [name, setName] = useState("");
+    const router = useRouter();
+
+    async function handleSubmit(formData: FormData) {
+        await action(formData);
+        router.refresh(); 
+        setName("");     
+    }
 
     return (
-        <form onSubmit = {async (event) => {
-            event.preventDefault();
-            updateName(append.id, name)
-            .then((newName) => newName)
-            .catch((err) => console.error(err))
-        }}>
+        <form action={handleSubmit}>
+        <input type="hidden" name="id" value={id} />
 
-        <TextField id="name"
-            label="Name"
-            sx={{ backgroundColor: "white", width: "100%" }}
-            variant="outlined"
+        <label htmlFor="name">New Name</label>
+        <input
+            type="text"
+            name="name"
             value={name}
-            onChange={(event) => setName(event.target.value)}
+            onChange={(e) => setName(e.target.value)}
         />
 
-        <Button type="submit" variant="contained">Update</Button>
+        <button type="submit">Update</button>
         </form>
     );
 }

@@ -6,18 +6,16 @@ import {EmployeeProps} from "@/types";
 
 export default async function getEmployeeById(id: string) : Promise<EmployeeProps | null> {
 
-    const employeeId = ObjectId.createFromHexString(id);
-
     const employeeCollection = await getCollection(DATA_COLLECTION);
 
-    const data = await employeeCollection.findOne({ _id: employeeId})
+    const data = await employeeCollection.findOne({ _id: new ObjectId(id) });
 
     if (data === null) {
         return null
     }
 
     const employee = {
-        id: id,
+        id,
         name: data.name,
         salary: data.salary,
         absences: data.absences,
