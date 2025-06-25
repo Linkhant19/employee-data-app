@@ -23,6 +23,8 @@ export default async function getEmployeeById(id: string) : Promise<EmployeeProp
         othours: data.othours,
         weddinghours: data.weddinghours,
         status: data.status,
+        weddingpay: data.weddingpay,
+        bonusmultiplier: data.bonusmultiplier,
     };
 
     return employee;

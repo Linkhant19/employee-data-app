@@ -1,4 +1,4 @@
-// components/update-absences-form.tsx
+// components/forms/update-absences-form.tsx
 
 "use client";
 

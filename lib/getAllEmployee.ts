@@ -16,6 +16,8 @@ export default async function getAllEmployee(): Promise<EmployeeProps[]> {
         othours: e.othours,
         weddinghours: e.weddinghours,
         status: e.status,
+        weddingpay: e.weddingpay,
+        bonusmultiplier: e.bonusmultiplier,
     }))
     
     return employees.reverse()

@@ -1,11 +1,11 @@
-// lib/updateName.ts
+// lib/updateFunctions/updateWeddingHours.ts
 
 "use server";
 
 import getCollection, { DATA_COLLECTION } from "@/db";
 import { ObjectId } from "mongodb";
 
-export default async function updateName(formData: FormData): Promise<void> {
+export default async function updateWeddingHours(formData: FormData): Promise<void> {
     const id = formData.get("id") as string;
     const weddinghours = formData.get("weddinghours") as string;
 

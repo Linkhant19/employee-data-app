@@ -1,4 +1,4 @@
-// components/update-othours-form.tsx
+// components/forms/update-othours-form.tsx
 
 "use client";
 

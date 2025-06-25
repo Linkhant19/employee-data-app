@@ -1,4 +1,4 @@
-// components/update-name-form.tsx
+// components/forms/update-name-form.tsx
 
 "use client";
 
