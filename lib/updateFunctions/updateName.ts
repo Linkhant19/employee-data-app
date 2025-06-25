@@ -1,4 +1,4 @@
-// lib/updateName.ts
+// lib/updateFunctions/updateName.ts
 
 "use server";
 

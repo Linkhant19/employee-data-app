@@ -17,6 +17,8 @@ export default async function addNewEmployee(
         othours: 0,
         weddinghours: 0,
         status: "Active",
+        weddingpay: 0,
+        bonusmultiplier: 0,
     }
 
     const employeeCollection = await getCollection(DATA_COLLECTION);

@@ -1,4 +1,4 @@
-// components/update-weddinghours-form.tsx
+// components/forms/update-weddinghours-form.tsx
 
 "use client";
 

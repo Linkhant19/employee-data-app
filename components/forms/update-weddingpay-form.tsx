@@ -1,36 +1,36 @@
-// components/forms/update-otdays-form.tsx
+// components/forms/update-weddingpay-form.tsx
 
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function UpdateOtdaysForm({
+export default function UpdateWeddingPayForm({
     action,
     id,
 }: {
     action: (formData: FormData) => Promise<void>;
     id: string;
 }) {
-    const [otdays, setOtdays] = useState("");
+    const [weddingpay, setWeddingPay] = useState("");
     const router = useRouter();
 
     async function handleSubmit(formData: FormData) {
         await action(formData);
         router.refresh(); 
-        setOtdays("");     
+        setWeddingPay("");     
     }
 
     return (
         <form action={handleSubmit}>
         <input type="hidden" name="id" value={id} />
 
-        <label htmlFor="otdays">New Number of Overtime Hours</label>
+        <label htmlFor="weddingpay">New Wedding Pay</label>
         <input
             type="text"
-            name="otdays"
-            value={otdays}
-            onChange={(e) => setOtdays(e.target.value)}
+            name="weddingpay"
+            value={weddingpay}
+            onChange={(e) => setWeddingPay(e.target.value)}
         />
 
         <button type="submit">Update</button>

@@ -1,4 +1,4 @@
-// components/update-salary-form.tsx
+// components/forms/update-salary-form.tsx
 
 "use client";
 
