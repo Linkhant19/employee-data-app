@@ -2,19 +2,21 @@
 
 "use server";
 
-import getCollection, {DATA_COLLECTION} from "@/db";
-import {EmployeeProps} from "@/types";
+import getCollection, { DATA_COLLECTION } from "@/db";
+import { ObjectId } from "mongodb";
 
-export default async function updateName(
-    id: string,
-    name: string,
-): Promise<void> {
+export default async function updateName(formData: FormData): Promise<void> {
+    const id = formData.get("id") as string;
+    const name = formData.get("name") as string;
 
-    const employeeCollection = await getCollection(DATA_COLLECTION);
-    const employee = await employeeCollection.findOneAndUpdate({id}, {name});
+    const collection = await getCollection(DATA_COLLECTION);
 
-    if (!employee) {
-        throw new Error ("Cannot find employee or update");
+    const result = await collection.updateOne(
+        { _id: new ObjectId(id) }, // because I am using ObjectId instead of string
+        { $set: { name } }
+    );
+
+    if (result.modifiedCount === 0) {
+        throw new Error("Update failed: Employee not found.");
     }
-
 }
