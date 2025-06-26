@@ -12,7 +12,7 @@ export default function UpdateBonusMultiplierForm({
     action: (formData: FormData) => Promise<void>;
     id: string;
 }) {
-    const [bonusMultiplier, setBonusMultiplier] = useState("");
+    const [bonusmultiplier, setBonusMultiplier] = useState("");
     const router = useRouter();
 
     async function handleSubmit(formData: FormData) {
@@ -29,7 +29,7 @@ export default function UpdateBonusMultiplierForm({
         <input
             type="text"
             name="bonusmultiplier"
-            value={bonusMultiplier}
+            value={bonusmultiplier}
             onChange={(e) => setBonusMultiplier(e.target.value)}
         />
 
