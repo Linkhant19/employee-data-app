@@ -1,10 +1,10 @@
 // db.ts
 
-import { MongoClient, Db, Collection } from "mongodb";
+import { MongoClient, Db, Collection, Document } from "mongodb";
 
 const MONGO_URI = process.env.MONGO_URI as string;
 if (!MONGO_URI) {
-    throw new Error("MONGODB_URI is not defined");
+    throw new Error("MONGO_URI is not defined");
 }
 
 const DB_NAME = "employee-data";
@@ -21,11 +21,11 @@ async function connect(): Promise<Db> {
     return client.db(DB_NAME);
 }
 
-export default async function getCollection (
-    collectionName: string,
-): Promise<Collection> {
+export default async function getCollection<T extends Document = Document>(
+    collectionName: string
+    ): Promise<Collection<T>> {
     if (!db) {
         db = await connect();
     }
-    return db.collection(collectionName);
+    return db.collection<T>(collectionName);
 }
