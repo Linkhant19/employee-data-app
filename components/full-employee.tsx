@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { EmployeeProps } from "@/types";
+
+// update forms
 import UpdateNameForm from "@/components/forms/update-name-form";
 import UpdateSalaryForm from "@/components/forms/update-salary-form";
 import UpdateAbsencesForm from "@/components/forms/update-absences-form";
@@ -9,6 +11,10 @@ import UpdateOtDaysForm from "@/components/forms/update-otdays-form";
 import UpdateOtHoursForm from "@/components/forms/update-othours-form";
 import UpdateWeddingHoursForm from "@/components/forms/update-weddinghours-form";
 import UpdateStatusForm from "@/components/forms/update-status-form";
+import UpdateWeddingPayForm from "@/components/forms/update-weddingpay-form";
+import UpdateBonusMultiplierForm from "@/components/forms/update-bonusmultiplier-form";
+
+// update functions
 import updateName from "@/lib/updateFunctions/updateName";
 import updateSalary from "@/lib/updateFunctions/updateSalary";
 import updateAbsences from "@/lib/updateFunctions/updateAbsences";
@@ -16,6 +22,8 @@ import updateOtDays from "@/lib/updateFunctions/updateOtdays";
 import updateOtHours from "@/lib/updateFunctions/updateOthours";
 import updateWeddingHours from "@/lib/updateFunctions/updateWeddingHours";
 import updateStatus from "@/lib/updateFunctions/updateStatus";
+import updateWeddingPay from "@/lib/updateFunctions/updateWeddingPay";
+import updateBonusMultiplier from "@/lib/updateFunctions/updateBonusMultiplier";
 
 export default function FullEmployee({ person }: { person: EmployeeProps }) {
     const [showNameForm, setShowNameForm] = useState(false);
@@ -25,6 +33,8 @@ export default function FullEmployee({ person }: { person: EmployeeProps }) {
     const [showOtHoursForm, setShowOtHoursForm] = useState(false);
     const [showWeddingHoursForm, setShowWeddingHoursForm] = useState(false);
     const [showStatusForm, setShowStatusForm] = useState(false);
+    const [showWeddingPayForm, setShowWeddingPayForm] = useState(false);
+    const [showBonusMultiplierForm, setShowBonusMultiplierForm] = useState(false);
 
     return (
         <div>
@@ -89,6 +99,24 @@ export default function FullEmployee({ person }: { person: EmployeeProps }) {
             showForm={showStatusForm}
             toggle={() => setShowStatusForm((prev) => !prev)}
             form={<UpdateStatusForm action={updateStatus} id={person.id} />}
+        />
+
+        {/* Wedding Pay */}
+        <FieldToggle
+            label="Wedding Pay"
+            value={person.weddingpay}
+            showForm={showWeddingPayForm}
+            toggle={() => setShowWeddingPayForm((prev) => !prev)}
+            form={<UpdateWeddingPayForm action={updateWeddingPay} id={person.id} />}
+        />
+
+        {/* Bonus Multiplier */}
+        <FieldToggle
+            label="Bonus Multiplier"
+            value={person.bonusmultiplier}
+            showForm={showBonusMultiplierForm}
+            toggle={() => setShowBonusMultiplierForm((prev) => !prev)}
+            form={<UpdateBonusMultiplierForm action={updateBonusMultiplier} id={person.id} />}
         />
         </div>
     );
