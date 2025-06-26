@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { EmployeeProps } from "@/types";
+import { getBonusPointValue } from "@/lib/getBonusPointValue";
 
 // update forms
 import UpdateNameForm from "@/components/forms/update-name-form";
