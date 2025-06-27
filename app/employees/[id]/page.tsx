@@ -3,12 +3,14 @@
 import FullEmployee from "@/components/full-employee";
 import getEmployeeById from "@/lib/getEmployeeById";
 import { redirect } from "next/navigation";
+import { getBonusPointValue } from "@/lib/getBonusPointValue";
 
 export default async function FullEmployeePage({ params,
 }: {
     params: Promise<{ id: string }>;
 }) {
     const { id } = await params;
+    const bonusPointValue = await getBonusPointValue();
     
     try {
         const employee = await getEmployeeById(id);
@@ -19,7 +21,7 @@ export default async function FullEmployeePage({ params,
 
         return (
             <div>
-                <FullEmployee person={employee} />
+                <FullEmployee person={employee} bonusPointValue={bonusPointValue} />
             </div>
         );
     } catch (error) {
