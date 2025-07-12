@@ -11,21 +11,23 @@ const DB_NAME = "employee-data";
 export const DATA_COLLECTION = "data-collection";
 
 let client: MongoClient | null = null;
-let db: Db | null = null;
 
-async function connect(): Promise<Db> {
+export async function getMongoClient(): Promise<MongoClient> {
     if (!client) {
         client = new MongoClient(MONGO_URI);
         await client.connect();
     }
+    return client;
+}
+
+export async function getDb(): Promise<Db> {
+    const client = await getMongoClient();
     return client.db(DB_NAME);
 }
 
 export default async function getCollection<T extends Document = Document>(
     collectionName: string
-    ): Promise<Collection<T>> {
-    if (!db) {
-        db = await connect();
-    }
+): Promise<Collection<T>> {
+    const db = await getDb();
     return db.collection<T>(collectionName);
 }

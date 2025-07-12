@@ -4,17 +4,20 @@ import getCollection, {DATA_COLLECTION} from "@/db";
 import {ObjectId} from "mongodb";
 import {EmployeeProps} from "@/types";
 
-export default async function getEmployeeById(id: string) : Promise<EmployeeProps | null> {
-
+export default async function getEmployeeById(
+    id: string,
+    userId: string
+): Promise<EmployeeProps | null> {
     const employeeCollection = await getCollection(DATA_COLLECTION);
-
-    const data = await employeeCollection.findOne({ _id: new ObjectId(id) });
-
-    if (data === null) {
-        return null
-    }
-
-    const employee = {
+  
+    const data = await employeeCollection.findOne({
+        _id: new ObjectId(id),
+        userId: userId,
+    });
+  
+    if (!data) return null;
+  
+    const employee: EmployeeProps = {
         id,
         name: data.name,
         salary: data.salary,
@@ -28,7 +31,7 @@ export default async function getEmployeeById(id: string) : Promise<EmployeeProp
         basepay: data.basepay,
         totalpay: data.totalpay,
     };
-
+  
     return employee;
 }
 

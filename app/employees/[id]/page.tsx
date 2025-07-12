@@ -4,16 +4,21 @@ import FullEmployee from "@/components/full-employee";
 import getEmployeeById from "@/lib/getEmployeeById";
 import { redirect } from "next/navigation";
 import { getBonusPointValue } from "@/lib/getBonusPointValue";
+import { getServerSession } from "next-auth";
+import { getAuthOptions } from "@/lib/authOptions"; 
 
-export default async function FullEmployeePage({ params,
-}: {
-    params: Promise<{ id: string }>;
-}) {
-    const { id } = await params;
+export default async function FullEmployeePage({ params }: { params: { id: string } }) {
+    const session = await getServerSession(await getAuthOptions()); 
+
+    if (!session?.user?.id) {
+        return redirect("/auth/signin");
+    }
+
+    const userId = session.user.id;
     const bonusPointValue = await getBonusPointValue();
-    
+
     try {
-        const employee = await getEmployeeById(id);
+        const employee = await getEmployeeById(params.id, userId);
 
         if (!employee) {
             return redirect("/");
@@ -28,5 +33,6 @@ export default async function FullEmployeePage({ params,
         console.error(error);
         return redirect("/");
     }
-
 }
+
+

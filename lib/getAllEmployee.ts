@@ -3,10 +3,11 @@
 import getCollection, {DATA_COLLECTION} from "@/db";
 import {EmployeeProps} from "@/types";
 
-export default async function getAllEmployee(): Promise<EmployeeProps[]> {
-    const employeeCollection = await getCollection(DATA_COLLECTION)
-    const data = await employeeCollection.find().toArray();
-
+export default async function getAllEmployee(userId: string): Promise<EmployeeProps[]> {
+    const employeeCollection = await getCollection(DATA_COLLECTION);
+  
+    const data = await employeeCollection.find({ userId: userId }).toArray();
+  
     const employees: EmployeeProps[] = data.map((e) => ({
         id: e._id.toHexString(),
         name: e.name,
@@ -18,7 +19,10 @@ export default async function getAllEmployee(): Promise<EmployeeProps[]> {
         status: e.status,
         weddingpay: e.weddingpay,
         bonusmultiplier: e.bonusmultiplier,
-    }))
-    
-    return employees.reverse()
-}
+        basepay: e.basepay,
+        totalpay: e.totalpay,
+    }));
+  
+    return employees.reverse();
+  }
+  
