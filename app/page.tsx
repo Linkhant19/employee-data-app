@@ -2,11 +2,11 @@
 
 import EmployeeDisplay from "@/components/employee-display";
 import getAllEmployee from "@/lib/getAllEmployee";
-import LogoutButton from "@/components/logout-button";
-import LoginButton from "@/components/login-button";
+import Header from "@/components/header";
 
 import { getServerSession } from "next-auth";
 import { getAuthOptions } from "@/lib/authOptions"; 
+import Head from "next/head";
 
 export default async function Home() {
   const session = await getServerSession(await getAuthOptions()); 
@@ -14,16 +14,18 @@ export default async function Home() {
   console.log("USER ID:", session?.user?.id);
 
   if (!session?.user?.id) {
-    return <p>You must be signed in to view this page.
-      <LogoutButton />
-      <LoginButton />
-    </p>;
+    return (
+      <>
+        <Header userId={null} userImage={null}/>
+      </>
+    );
   }
 
   const employees = await getAllEmployee(session.user.id);
 
   return (
     <div>
+      <Header userId={session.user.id} userImage={session.user.image}/>
       <EmployeeDisplay inputEmployees={employees} />
     </div>
   );
