@@ -37,6 +37,7 @@ export default function EmployeeDisplay({ inputEmployees } : { inputEmployees: E
                 <StyledParagraph>OT Days</StyledParagraph>
                 <StyledParagraph>OT Hours</StyledParagraph>
                 <StyledParagraph>Wedding Hours</StyledParagraph>
+                <StyledParagraph>Total Pay</StyledParagraph>
                 <StyledParagraph>Status</StyledParagraph>
             </StyledDiv>
             
