@@ -31,6 +31,7 @@ export default function EmployeePreview({ person }: { person: EmployeeProps }) {
                 <StyledParagraph>{person.otdays}</StyledParagraph>
                 <StyledParagraph>{person.othours}</StyledParagraph>
                 <StyledParagraph>{person.weddinghours}</StyledParagraph>
+                <StyledParagraph>{person.totalpay}</StyledParagraph>
                 <StyledParagraph>{person.status}</StyledParagraph>
             </StyledDiv>     
         </Link>

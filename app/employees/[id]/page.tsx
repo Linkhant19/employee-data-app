@@ -18,7 +18,8 @@ export default async function FullEmployeePage({ params }: { params: { id: strin
     const bonusPointValue = await getBonusPointValue();
 
     try {
-        const employee = await getEmployeeById(params.id, userId);
+        const param = await params;
+        const employee = await getEmployeeById(param.id, userId);
 
         if (!employee) {
             return redirect("/");

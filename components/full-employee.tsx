@@ -1,3 +1,7 @@
+// components/full-employee.tsx
+
+// this is the component we will render for each employee with their respective ids.
+
 "use client";
 
 import { useState } from "react";
@@ -29,6 +33,9 @@ import updateBonusMultiplier from "@/lib/updateFunctions/updateBonusMultiplier";
 import calcBasePay from "@/lib/calcFunctions/calcBasePay";
 import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
 
+// our styles
+import { StyledLink } from "@/components/styles/styled-components";
+
 export default function FullEmployee({ person, bonusPointValue }: { person: EmployeeProps, bonusPointValue: number }) {
     const [showNameForm, setShowNameForm] = useState(false);
     const [showSalaryForm, setShowSalaryForm] = useState(false);
@@ -42,6 +49,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
 
     return (
         <div>
+            <StyledLink href={`/`}>← Home</StyledLink>
             {/* Name */}
             <FieldToggle
                 label="Name"

@@ -2,7 +2,7 @@
 
 import LoginButton from "./login-button";
 import LogoutButton from "./logout-button";
-import { StyledTitle1, HeaderDiv } from "./styles/styled-components";
+import { StyledTitle1, HeaderDiv, StyledImg } from "./styles/styled-components";
 
 type HeaderProps = {
     userId: string | null;
@@ -12,7 +12,7 @@ type HeaderProps = {
 export default function Header({ userId, userImage }: HeaderProps) {
     return (
         <HeaderDiv>
-            {userImage && <img src={userImage} alt="User" />}
+            {userImage && <StyledImg src={userImage} alt="User" />}
             <StyledTitle1>Employee Data App</StyledTitle1>
             {userId !== null ? <LogoutButton /> : <LoginButton />}
         </HeaderDiv>

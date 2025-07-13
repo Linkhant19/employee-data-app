@@ -4,9 +4,9 @@
 
 import addNewEmployee from "@/lib/addNewEmployee";
 import { EmployeeProps } from "@/types";
-import { Textarea } from "@mui/joy";
-import { Button, FormHelperText, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useState } from "react";
+import { StyledTextField, TextFieldDiv, AddButton } from "./styles/styled-components";
 
 export default function NewEmployeeForm({append}: {append: (data: EmployeeProps) => void}) {
     const [name, setName] = useState("");
@@ -19,24 +19,26 @@ export default function NewEmployeeForm({append}: {append: (data: EmployeeProps)
                 .then((newEmployee) => append(newEmployee))
                 .catch((err) => console.error(err));
         }}>
-            <TextField
-                id="name"
-                label="Name"
-                sx={{ backgroundColor: "white", width: "100%" }}
-                variant="outlined"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-            />
-            <TextField
-                id="salary"
-                label="Salary"
-                sx={{ backgroundColor: "white", width: "100%" }}
-                variant="outlined"
-                value={salary}
-                onChange={(event) => setSalary(Number(event.target.value))}
-            />
+            <TextFieldDiv>
+                <StyledTextField
+                    id="name"
+                    label="Name"
+                    variant="outlined"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                />
+                <StyledTextField
+                    id="salary"
+                    label="Salary"
+                    variant="outlined"
+                    value={salary}
+                    onChange={(event) => setSalary(Number(event.target.value))}
+                />
+                <AddButton type="submit">Add</AddButton>
+            </TextFieldDiv>
             
-            <Button type="submit" variant="contained">Add Employee</Button>
+            
+          
         </form>
     );
 }
