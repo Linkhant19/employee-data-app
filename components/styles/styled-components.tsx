@@ -62,3 +62,49 @@ export const AddButton = styled.button`
         background-color: navy;
     }
 `;
+
+// for each employee page by id
+
+export const FieldsDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    width: 80%;
+    border: 1px solid black;
+
+    margin: 20px auto;
+`;
+
+export const StyledDiv0 = styled.div`
+    width: 90%;
+    margin: 20px auto;
+`;
+
+export const StyledDiv1 = styled.div`
+
+`;
+
+export const StyledDiv2 = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 10px;
+`;
+
+export const StyledDiv3 = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80vw;
+    padding: 0 10px;
+`;
+
+export const FinalPayDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+`;

@@ -7,15 +7,17 @@ import styled from "styled-components";
 const StyledDiv = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
-    border: 1px solid black;
     padding: 5px;
+    margin: 20px;
 `;
 
 const StyledParagraph = styled.p`
     width: 10%;
     font-size: 1.3em;
     margin: 0;
+    text-align: center;
 `;
 
 export default function EmployeePreview({ person }: { person: EmployeeProps }) {

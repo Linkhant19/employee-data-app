@@ -34,7 +34,7 @@ import calcBasePay from "@/lib/calcFunctions/calcBasePay";
 import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
 
 // our styles
-import { StyledLink } from "@/components/styles/styled-components";
+import { StyledLink, FieldsDiv, StyledDiv0, StyledDiv2, StyledDiv3, FinalPayDiv } from "@/components/styles/styled-components";
 
 export default function FullEmployee({ person, bonusPointValue }: { person: EmployeeProps, bonusPointValue: number }) {
     const [showNameForm, setShowNameForm] = useState(false);
@@ -48,99 +48,105 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
     const [showBonusMultiplierForm, setShowBonusMultiplierForm] = useState(false);
 
     return (
-        <div>
+        <StyledDiv0>
             <StyledLink href={`/`}>← Home</StyledLink>
-            {/* Name */}
-            <FieldToggle
-                label="Name"
-                value={person.name}
-                showForm={showNameForm}
-                toggle={() => setShowNameForm((prev) => !prev)}
-                form={<UpdateNameForm action={updateName} id={person.id} />}
-            />
 
-            {/* Salary */}
-            <FieldToggle
-                label="Salary"
-                value={person.salary}
-                showForm={showSalaryForm}
-                toggle={() => setShowSalaryForm((prev) => !prev)}
-                form={<UpdateSalaryForm action={updateSalary} id={person.id} />}
-            />
+            <FieldsDiv>
+                {/* Name */}
+                <FieldToggle
+                    label="Name"
+                    value={person.name}
+                    showForm={showNameForm}
+                    toggle={() => setShowNameForm((prev) => !prev)}
+                    form={<UpdateNameForm action={updateName} id={person.id} />}
+                />
 
-            {/* Absences */}
-            <FieldToggle
-                label="Absences"
-                value={person.absences}
-                showForm={showAbsencesForm}
-                toggle={() => setShowAbsencesForm((prev) => !prev)}
-                form={<UpdateAbsencesForm action={updateAbsences} id={person.id} />}
-            />
+                {/* Salary */}
+                <FieldToggle
+                    label="Salary"
+                    value={person.salary}
+                    showForm={showSalaryForm}
+                    toggle={() => setShowSalaryForm((prev) => !prev)}
+                    form={<UpdateSalaryForm action={updateSalary} id={person.id} />}
+                />
 
-            {/* OT Days */}
-            <FieldToggle
-                label="OT Days"
-                value={person.otdays}
-                showForm={showOtDaysForm}
-                toggle={() => setShowOtDaysForm((prev) => !prev)}
-                form={<UpdateOtDaysForm action={updateOtDays} id={person.id} />}
-            />
+                {/* Absences */}
+                <FieldToggle
+                    label="Absences"
+                    value={person.absences}
+                    showForm={showAbsencesForm}
+                    toggle={() => setShowAbsencesForm((prev) => !prev)}
+                    form={<UpdateAbsencesForm action={updateAbsences} id={person.id} />}
+                />
 
-            {/* OT Hours */}
-            <FieldToggle
-                label="OT Hours"
-                value={person.othours}
-                showForm={showOtHoursForm}
-                toggle={() => setShowOtHoursForm((prev) => !prev)}
-                form={<UpdateOtHoursForm action={updateOtHours} id={person.id} />}
-            />
+                {/* OT Days */}
+                <FieldToggle
+                    label="OT Days"
+                    value={person.otdays}
+                    showForm={showOtDaysForm}
+                    toggle={() => setShowOtDaysForm((prev) => !prev)}
+                    form={<UpdateOtDaysForm action={updateOtDays} id={person.id} />}
+                />
 
-            {/* Wedding Hours */}
-            <FieldToggle
-                label="Wedding Hours"
-                value={person.weddinghours}
-                showForm={showWeddingHoursForm}
-                toggle={() => setShowWeddingHoursForm((prev) => !prev)}
-                form={<UpdateWeddingHoursForm action={updateWeddingHours} id={person.id} />}
-            />
+                {/* OT Hours */}
+                <FieldToggle
+                    label="OT Hours"
+                    value={person.othours}
+                    showForm={showOtHoursForm}
+                    toggle={() => setShowOtHoursForm((prev) => !prev)}
+                    form={<UpdateOtHoursForm action={updateOtHours} id={person.id} />}
+                />
 
-            {/* Status */}
-            <FieldToggle
-                label="Status"
-                value={person.status}
-                showForm={showStatusForm}
-                toggle={() => setShowStatusForm((prev) => !prev)}
-                form={<UpdateStatusForm action={updateStatus} id={person.id} />}
-            />
+                {/* Wedding Hours */}
+                <FieldToggle
+                    label="Wedding Hours"
+                    value={person.weddinghours}
+                    showForm={showWeddingHoursForm}
+                    toggle={() => setShowWeddingHoursForm((prev) => !prev)}
+                    form={<UpdateWeddingHoursForm action={updateWeddingHours} id={person.id} />}
+                />
 
-            {/* Wedding Pay */}
-            <FieldToggle
-                label="Wedding Pay"
-                value={person.weddingpay}
-                showForm={showWeddingPayForm}
-                toggle={() => setShowWeddingPayForm((prev) => !prev)}
-                form={<UpdateWeddingPayForm action={updateWeddingPay} id={person.id} />}
-            />
+                {/* Status */}
+                <FieldToggle
+                    label="Status"
+                    value={person.status}
+                    showForm={showStatusForm}
+                    toggle={() => setShowStatusForm((prev) => !prev)}
+                    form={<UpdateStatusForm action={updateStatus} id={person.id} />}
+                />
 
-            {/* Bonus Multiplier */}
-            <FieldToggle
-                label="Bonus Multiplier"
-                value={person.bonusmultiplier}
-                showForm={showBonusMultiplierForm}
-                toggle={() => setShowBonusMultiplierForm((prev) => !prev)}
-                form={<UpdateBonusMultiplierForm action={updateBonusMultiplier} id={person.id} />}
-            />
+                {/* Wedding Pay */}
+                <FieldToggle
+                    label="Wedding Pay"
+                    value={person.weddingpay}
+                    showForm={showWeddingPayForm}
+                    toggle={() => setShowWeddingPayForm((prev) => !prev)}
+                    form={<UpdateWeddingPayForm action={updateWeddingPay} id={person.id} />}
+                />
 
-            {/* Base Pay calculated with calcBasePay */}
-            <p>
-                <strong>Base Pay:</strong> {calcBasePay(person.salary, person.absences)}
-            </p>
+                {/* Bonus Multiplier */}
+                <FieldToggle
+                    label="Bonus Multiplier"
+                    value={person.bonusmultiplier}
+                    showForm={showBonusMultiplierForm}
+                    toggle={() => setShowBonusMultiplierForm((prev) => !prev)}
+                    form={<UpdateBonusMultiplierForm action={updateBonusMultiplier} id={person.id} />}
+                />
+            </FieldsDiv>
 
-            {/* Total Pay calculated with calcTotalPay */}
-            <p>
-                <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.othours, person.weddinghours, person.weddingpay, person.bonusmultiplier, bonusPointValue, person.absences, calcBasePay(person.salary, person.absences))}
-            </p>
-        </div>
+            <FinalPayDiv>
+                {/* Base Pay calculated with calcBasePay */}
+                <p>
+                    <strong>Base Pay:</strong> {calcBasePay(person.salary, person.absences)}
+                </p>
+
+                {/* Total Pay calculated with calcTotalPay */}
+                <p>
+                    <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.othours, person.weddinghours, person.weddingpay, person.bonusmultiplier, bonusPointValue, person.absences, calcBasePay(person.salary, person.absences))}
+                </p>
+            </FinalPayDiv>
+            
+        </StyledDiv0>
     );
 }
 
@@ -158,14 +164,16 @@ function FieldToggle({
     form: React.ReactNode;
 }) {
     return (
-        <div style={{ marginBottom: "1rem" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <p onClick={toggle} style={{ cursor: "pointer" }}>
-            <strong>{label}:</strong> {value}
-            </p>
-            <button onClick={toggle}>{showForm ? "Cancel" : "Update"}</button>
-        </div>
-        {showForm && form}
+        <div>
+            <StyledDiv2>
+                <p onClick={toggle} style={{ cursor: "pointer" }}>
+                <strong>{label}:</strong> {value}
+                </p>
+                <button onClick={toggle}>{showForm ? "✔" : "✎"}</button>
+            </StyledDiv2>
+            <StyledDiv3>
+                {showForm && form}
+            </StyledDiv3>
         </div>
     );
 }

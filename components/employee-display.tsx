@@ -8,18 +8,24 @@ import EmployeePreview from "./employee-preview";
 import NewEmployeeForm from "./new-employee-form";
 import styled from "styled-components";
 
-const StyledDiv = styled.div`
+const TableDiv = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     border: 1px solid black;
     padding: 5px;
+    margin: 20px;
+    background-color: #4285F4; // edit note: change this when we have a actual palette
 `;
 
 const StyledParagraph = styled.p`
     width: 10%;
     font-size: 1.3em;
     margin: 0;
+    text-align: center;
+    font-weight: bold;
+    color: #222222; // edit note: change this when we have a actual palette
 `;
 
 export default function EmployeeDisplay({ inputEmployees } : { inputEmployees: EmployeeProps[] }) {
@@ -30,7 +36,7 @@ export default function EmployeeDisplay({ inputEmployees } : { inputEmployees: E
             <NewEmployeeForm 
                 append={(newEmployee: EmployeeProps) => setEmployees([...employees, newEmployee])} 
             />
-            <StyledDiv>
+            <TableDiv>
                 <StyledParagraph>Name</StyledParagraph>
                 <StyledParagraph>Salary</StyledParagraph>
                 <StyledParagraph>Absences</StyledParagraph>
@@ -39,7 +45,7 @@ export default function EmployeeDisplay({ inputEmployees } : { inputEmployees: E
                 <StyledParagraph>Wedding Hours</StyledParagraph>
                 <StyledParagraph>Total Pay</StyledParagraph>
                 <StyledParagraph>Status</StyledParagraph>
-            </StyledDiv>
+            </TableDiv>
             
             <div>
                 {employees.map((employee) => (
