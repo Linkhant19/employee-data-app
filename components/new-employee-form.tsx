@@ -4,7 +4,6 @@
 
 import addNewEmployee from "@/lib/addNewEmployee";
 import { EmployeeProps } from "@/types";
-import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { StyledTextField, TextFieldDiv, AddButton } from "./styles/styled-components";
 
