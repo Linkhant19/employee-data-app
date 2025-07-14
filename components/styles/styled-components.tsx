@@ -10,6 +10,10 @@ export const SignOutButton = styled.button`
     border: 1px solid white;
     padding: 5px 20px;
     border-radius: 7.5px;
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const StyledTitle1 = styled.h1`
@@ -52,6 +56,7 @@ export const StyledTextField = styled(TextField)`
 
 export const AddButton = styled.button`
     background-color: darkblue;
+    color: white;
     width: 20%;
     height: 5%;
     border-radius: 5px;
