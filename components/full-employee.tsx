@@ -58,7 +58,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     value={person.name}
                     showForm={showNameForm}
                     toggle={() => setShowNameForm((prev) => !prev)}
-                    form={<UpdateNameForm action={updateName} id={person.id} />}
+                    form={
+                        <UpdateNameForm 
+                            action={updateName} 
+                            id={person.id} 
+                            onSuccess={() => setShowNameForm(false)} 
+                        />}
                 />
 
                 {/* Salary */}
@@ -67,7 +72,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     value={person.salary}
                     showForm={showSalaryForm}
                     toggle={() => setShowSalaryForm((prev) => !prev)}
-                    form={<UpdateSalaryForm action={updateSalary} id={person.id} />}
+                    form={
+                        <UpdateSalaryForm 
+                            action={updateSalary} 
+                            id={person.id} 
+                            onSuccess={() => setShowSalaryForm(false)}
+                        />}
                 />
 
                 {/* Absences */}
@@ -76,8 +86,15 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     value={person.absences}
                     showForm={showAbsencesForm}
                     toggle={() => setShowAbsencesForm((prev) => !prev)}
-                    form={<UpdateAbsencesForm action={updateAbsences} id={person.id} />}
+                    form={
+                        <UpdateAbsencesForm
+                            action={updateAbsences}
+                            id={person.id}
+                            onSuccess={() => setShowAbsencesForm(false)}
+                        />
+                    }
                 />
+
 
                 {/* OT Days */}
                 <FieldToggle
@@ -85,7 +102,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     value={person.otdays}
                     showForm={showOtDaysForm}
                     toggle={() => setShowOtDaysForm((prev) => !prev)}
-                    form={<UpdateOtDaysForm action={updateOtDays} id={person.id} />}
+                    form={
+                        <UpdateOtDaysForm 
+                            action={updateOtDays} 
+                            id={person.id} 
+                            onSuccess={() => setShowOtDaysForm(false)}
+                        />}
                 />
 
                 {/* OT Hours */}
@@ -94,7 +116,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     value={person.othours}
                     showForm={showOtHoursForm}
                     toggle={() => setShowOtHoursForm((prev) => !prev)}
-                    form={<UpdateOtHoursForm action={updateOtHours} id={person.id} />}
+                    form={
+                        <UpdateOtHoursForm 
+                            action={updateOtHours} 
+                            id={person.id} 
+                            onSuccess={() => setShowOtHoursForm(false)}
+                        />}
                 />
 
                 {/* Wedding Hours */}
@@ -103,7 +130,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     value={person.weddinghours}
                     showForm={showWeddingHoursForm}
                     toggle={() => setShowWeddingHoursForm((prev) => !prev)}
-                    form={<UpdateWeddingHoursForm action={updateWeddingHours} id={person.id} />}
+                    form={
+                        <UpdateWeddingHoursForm 
+                            action={updateWeddingHours} 
+                            id={person.id} 
+                            onSuccess={() => setShowWeddingHoursForm(false)}
+                        />}
                 />
 
                 {/* Status */}
@@ -112,7 +144,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     value={person.status}
                     showForm={showStatusForm}
                     toggle={() => setShowStatusForm((prev) => !prev)}
-                    form={<UpdateStatusForm action={updateStatus} id={person.id} />}
+                    form={
+                        <UpdateStatusForm 
+                            action={updateStatus} 
+                            id={person.id} 
+                            onSuccess={() => setShowStatusForm(false)}
+                        />}
                 />
 
                 {/* Wedding Pay */}
@@ -121,7 +158,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     value={person.weddingpay}
                     showForm={showWeddingPayForm}
                     toggle={() => setShowWeddingPayForm((prev) => !prev)}
-                    form={<UpdateWeddingPayForm action={updateWeddingPay} id={person.id} />}
+                    form={
+                        <UpdateWeddingPayForm 
+                            action={updateWeddingPay} 
+                            id={person.id} 
+                            onSuccess={() => setShowWeddingPayForm(false)}
+                        />}
                 />
 
                 {/* Bonus Multiplier */}
@@ -130,7 +172,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     value={person.bonusmultiplier}
                     showForm={showBonusMultiplierForm}
                     toggle={() => setShowBonusMultiplierForm((prev) => !prev)}
-                    form={<UpdateBonusMultiplierForm action={updateBonusMultiplier} id={person.id} />}
+                    form={
+                        <UpdateBonusMultiplierForm 
+                            action={updateBonusMultiplier} 
+                            id={person.id} 
+                            onSuccess={() => setShowBonusMultiplierForm(false)}
+                        />}
                 />
             </FieldsDiv>
 
