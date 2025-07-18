@@ -8,9 +8,11 @@ import { useRouter } from "next/navigation";
 export default function UpdateBonusMultiplierForm({
     action,
     id,
+    onSuccess,
 }: {
     action: (formData: FormData) => Promise<void>;
     id: string;
+    onSuccess: () => void;
 }) {
     const [bonusmultiplier, setBonusMultiplier] = useState("");
     const router = useRouter();
@@ -18,7 +20,8 @@ export default function UpdateBonusMultiplierForm({
     async function handleSubmit(formData: FormData) {
         await action(formData);
         router.refresh(); 
-        setBonusMultiplier("");     
+        setBonusMultiplier(""); 
+        onSuccess();    
     }
 
     return (
@@ -33,7 +36,7 @@ export default function UpdateBonusMultiplierForm({
             onChange={(e) => setBonusMultiplier(e.target.value)}
         />
 
-        <button type="submit">Update</button>
+        <button type="submit" className="hover:cursor-pointer">Update</button>
         </form>
     );
 }

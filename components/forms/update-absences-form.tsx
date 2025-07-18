@@ -9,9 +9,11 @@ import { useRouter } from "next/navigation";
 export default function UpdateAbsencesForm({
     action,
     id,
+    onSuccess,
 }: {
     action: (formData: FormData) => Promise<void>;
     id: string;
+    onSuccess: () => void;
 }) {
     const [absences, setAbsences] = useState("");
     const router = useRouter();
@@ -19,7 +21,8 @@ export default function UpdateAbsencesForm({
     async function handleSubmit(formData: FormData) {
         await action(formData);
         router.refresh(); 
-        setAbsences("");     
+        setAbsences(""); 
+        onSuccess();    
     }
 
     return (
@@ -34,7 +37,7 @@ export default function UpdateAbsencesForm({
             onChange={(e) => setAbsences(e.target.value)}
         />
 
-        <button type="submit">Update</button>
+        <button type="submit" className="hover:cursor-pointer">Update</button>
         </form>
     );
 }
