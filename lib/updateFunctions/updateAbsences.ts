@@ -8,6 +8,7 @@ import { ObjectId } from "mongodb";
 export default async function updateAbsences(formData: FormData): Promise<void> {
     const id = formData.get("id") as string;
     const absences = formData.get("absences") as string;
+    const totalpay = formData.get("totalpay") as string;
 
     const collection = await getCollection(DATA_COLLECTION);
 
@@ -19,4 +20,5 @@ export default async function updateAbsences(formData: FormData): Promise<void> 
     if (result.modifiedCount === 0) {
         throw new Error("Update failed: Employee not found.");
     }
+
 }
