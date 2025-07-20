@@ -4,6 +4,7 @@
 
 import getCollection, { DATA_COLLECTION } from "@/db";
 import { ObjectId } from "mongodb";
+import calcBasePay from "@/lib/calcFunctions/calcBasePay";
 
 export default async function updateSalary(formData: FormData): Promise<void> {
     const id = formData.get("id") as string;
