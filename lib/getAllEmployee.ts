@@ -19,6 +19,7 @@ export default async function getAllEmployee(userId: string): Promise<EmployeePr
         status: e.status,
         weddingpay: e.weddingpay,
         bonusmultiplier: e.bonusmultiplier,
+        bonusvalue: e.bonusvalue,
         basepay: e.basepay,
         totalpay: e.totalpay,
     }));

@@ -28,6 +28,7 @@ export default async function getEmployeeById(
         status: data.status,
         weddingpay: data.weddingpay,
         bonusmultiplier: data.bonusmultiplier,
+        bonusvalue: data.bonusvalue,
         basepay: data.basepay,
         totalpay: data.totalpay,
     };

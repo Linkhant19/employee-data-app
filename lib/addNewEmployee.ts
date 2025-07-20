@@ -29,6 +29,7 @@ export default async function addNewEmployee(
         status: "Active",
         weddingpay: 0,
         bonusmultiplier: 0,
+        bonusvalue: 0,
         basepay: 0,
         totalpay: 0,
         userId, 
