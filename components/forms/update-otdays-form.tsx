@@ -8,9 +8,11 @@ import { useRouter } from "next/navigation";
 export default function UpdateOtdaysForm({
     action,
     id,
+    onSuccess,
 }: {
     action: (formData: FormData) => Promise<void>;
     id: string;
+    onSuccess: () => void;
 }) {
     const [otdays, setOtdays] = useState("");
     const router = useRouter();
@@ -19,6 +21,7 @@ export default function UpdateOtdaysForm({
         await action(formData);
         router.refresh(); 
         setOtdays("");     
+        onSuccess();
     }
 
     return (
@@ -33,7 +36,7 @@ export default function UpdateOtdaysForm({
             onChange={(e) => setOtdays(e.target.value)}
         />
 
-        <button type="submit">Update</button>
+        <button type="submit" className="hover:cursor-pointer">Update</button>
         </form>
     );
 }

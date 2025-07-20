@@ -8,9 +8,11 @@ import { useRouter } from "next/navigation";
 export default function UpdateSalaryForm({
     action,
     id,
+    onSuccess,
 }: {
     action: (formData: FormData) => Promise<void>;
     id: string;
+    onSuccess: () => void;
 }) {
     const [salary, setSalary] = useState("");
     const router = useRouter();
@@ -18,7 +20,8 @@ export default function UpdateSalaryForm({
     async function handleSubmit(formData: FormData) {
         await action(formData);
         router.refresh(); 
-        setSalary("");     
+        setSalary("");
+        onSuccess();     
     }
 
     return (
@@ -33,7 +36,7 @@ export default function UpdateSalaryForm({
             onChange={(e) => setSalary(e.target.value)}
         />
 
-        <button type="submit">Update</button>
+        <button type="submit" className="hover:cursor-pointer">Update</button>
         </form>
     );
 }
