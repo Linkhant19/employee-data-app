@@ -11,6 +11,7 @@ export type EmployeeProps = {
     status: string;
     weddingpay: number;
     bonusmultiplier: number;
+    bonusvalue: number;
 
     basepay: number;
     totalpay: number;

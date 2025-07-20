@@ -17,6 +17,7 @@ import UpdateWeddingHoursForm from "@/components/forms/update-weddinghours-form"
 import UpdateStatusForm from "@/components/forms/update-status-form";
 import UpdateWeddingPayForm from "@/components/forms/update-weddingpay-form";
 import UpdateBonusMultiplierForm from "@/components/forms/update-bonusmultiplier-form";
+import UpdateBonusValueForm from "@/components/forms/update-bonusvalue-form";
 
 // update functions
 import updateName from "@/lib/updateFunctions/updateName";
@@ -28,6 +29,7 @@ import updateWeddingHours from "@/lib/updateFunctions/updateWeddingHours";
 import updateStatus from "@/lib/updateFunctions/updateStatus";
 import updateWeddingPay from "@/lib/updateFunctions/updateWeddingPay";
 import updateBonusMultiplier from "@/lib/updateFunctions/updateBonusMultiplier";
+import updateBonusValue from "@/lib/updateFunctions/updateBonusValue";
 
 // calc functions
 import calcBasePay from "@/lib/calcFunctions/calcBasePay";
@@ -46,6 +48,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
     const [showStatusForm, setShowStatusForm] = useState(false);
     const [showWeddingPayForm, setShowWeddingPayForm] = useState(false);
     const [showBonusMultiplierForm, setShowBonusMultiplierForm] = useState(false);
+    const [showBonusValueForm, setShowBonusValueForm] = useState(false);
 
     return (
         <StyledDiv0>
@@ -179,6 +182,21 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                             onSuccess={() => setShowBonusMultiplierForm(false)}
                         />}
                 />
+
+                {/* Bonus Value */}
+                <FieldToggle
+                    label="Bonus Value"
+                    value={person.bonusvalue}
+                    showForm={showBonusValueForm}
+                    toggle={() => setShowBonusValueForm((prev) => !prev)}
+                    form={
+                        <UpdateBonusValueForm 
+                            action={updateBonusValue} 
+                            id={person.id} 
+                            onSuccess={() => setShowBonusValueForm(false)}
+                        />}   
+                />
+
             </FieldsDiv>
 
             <FinalPayDiv>
@@ -189,7 +207,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
 
                 {/* Total Pay calculated with calcTotalPay */}
                 <p>
-                    <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.othours, person.weddinghours, person.weddingpay, person.bonusmultiplier, bonusPointValue, person.absences, calcBasePay(person.salary, person.absences))}
+                    <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.othours, person.weddinghours, person.weddingpay, person.bonusmultiplier, person.bonusvalue, person.absences, calcBasePay(person.salary, person.absences))}
                 </p>
             </FinalPayDiv>
             
