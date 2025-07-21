@@ -18,6 +18,7 @@ import UpdateStatusForm from "@/components/forms/update-status-form";
 import UpdateWeddingPayForm from "@/components/forms/update-weddingpay-form";
 import UpdateBonusMultiplierForm from "@/components/forms/update-bonusmultiplier-form";
 import UpdateBonusValueForm from "@/components/forms/update-bonusvalue-form";
+import UpdateMonthForm from "@/components/forms/update-month-form";
 import UpdateYearForm from "@/components/forms/update-year-form";
 
 // update functions
@@ -31,6 +32,7 @@ import updateStatus from "@/lib/updateFunctions/updateStatus";
 import updateWeddingPay from "@/lib/updateFunctions/updateWeddingPay";
 import updateBonusMultiplier from "@/lib/updateFunctions/updateBonusMultiplier";
 import updateBonusValue from "@/lib/updateFunctions/updateBonusValue";
+import updateMonth from "@/lib/updateFunctions/updateMonth";
 import updateYear from "@/lib/updateFunctions/updateYear";
 
 // calc functions
@@ -51,6 +53,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
     const [showWeddingPayForm, setShowWeddingPayForm] = useState(false);
     const [showBonusMultiplierForm, setShowBonusMultiplierForm] = useState(false);
     const [showBonusValueForm, setShowBonusValueForm] = useState(false);
+    const [showMonthForm, setShowMonthForm] = useState(false);
     const [showYearForm, setShowYearForm] = useState(false);
 
     return (
@@ -198,6 +201,20 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                             id={person.id} 
                             onSuccess={() => setShowBonusValueForm(false)}
                         />}   
+                />
+
+                {/* Month */}
+                <FieldToggle
+                    label="Month"
+                    value={person.month}
+                    showForm={showMonthForm}
+                    toggle={() => setShowMonthForm((prev) => !prev)}
+                    form={
+                        <UpdateMonthForm 
+                            action={updateMonth} 
+                            id={person.id} 
+                            onSuccess={() => setShowMonthForm(false)}
+                        />}
                 />
 
                 {/* Year */}
