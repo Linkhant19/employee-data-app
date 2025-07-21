@@ -22,6 +22,8 @@ export default async function getAllEmployee(userId: string): Promise<EmployeePr
         bonusvalue: e.bonusvalue,
         basepay: e.basepay,
         totalpay: e.totalpay,
+        month: e.month,
+        year: e.year
     }));
   
     return employees.reverse();
