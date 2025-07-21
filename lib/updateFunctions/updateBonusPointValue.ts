@@ -1,5 +1,7 @@
 // lib/updateFunctions/updateBonusPointValue.ts
 
+// not used right now. maybe delete
+
 "use server";
 
 import getCollection from "@/db";

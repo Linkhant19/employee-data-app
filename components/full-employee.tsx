@@ -236,12 +236,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
             <FinalPayDiv>
                 {/* Base Pay calculated with calcBasePay */}
                 <p>
-                    <strong>Base Pay:</strong> {calcBasePay(person.salary, person.absences)}
+                    <strong>Base Pay:</strong> {calcBasePay(person.salary, person.absences, person.month, person.year)}
                 </p>
 
                 {/* Total Pay calculated with calcTotalPay */}
                 <p>
-                    <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.othours, person.weddinghours, person.weddingpay, person.bonusmultiplier, person.bonusvalue, person.absences, calcBasePay(person.salary, person.absences))}
+                    <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.othours, person.weddinghours, person.weddingpay, person.bonusmultiplier, person.bonusvalue, person.absences, person.month, person.year, calcBasePay(person.salary, person.absences, person.month, person.year))}
                 </p>
             </FinalPayDiv>
             
