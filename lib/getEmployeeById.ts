@@ -31,6 +31,8 @@ export default async function getEmployeeById(
         bonusvalue: data.bonusvalue,
         basepay: data.basepay,
         totalpay: data.totalpay,
+        month: data.month,
+        year: data.year
     };
   
     return employee;

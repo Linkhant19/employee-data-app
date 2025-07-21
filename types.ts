@@ -13,6 +13,10 @@ export type EmployeeProps = {
     bonusmultiplier: number;
     bonusvalue: number;
 
+    // payroll month and year (not their employment date)
+    month: string;
+    year: number;
+
     basepay: number;
     totalpay: number;
 };
