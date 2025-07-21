@@ -34,6 +34,7 @@ export default function UpdateYearForm({
             name="year"
             value={year}
             onChange={(e) => setYear(e.target.value)}
+            placeholder="YYYY" 
         />
 
         <button type="submit" className="hover:cursor-pointer">Update</button>
