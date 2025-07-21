@@ -17,7 +17,14 @@ const months : Record<string, number> = {
 };
 
 export default function calcBasePay(salary: number, absences: number, month: string, year: number): number {
-    const numDays = months[month];
+    let numDays = months[month];
+
+    // check if it is a leap year
+    if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
+        if (month === "Feb") {
+            numDays = 29;
+        }
+    }
         
     const dailyRate = salary / numDays;
     const num = salary - ((absences - 3) * dailyRate);
