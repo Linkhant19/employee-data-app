@@ -209,7 +209,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                     form={
                         <UpdateYearForm 
                             action={updateYear} 
-                            id={person.id} 
+                            id={person.id}
                             onSuccess={() => setShowYearForm(false)} 
                         />}
                 />
