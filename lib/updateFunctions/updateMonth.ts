@@ -4,28 +4,23 @@
 
 import getCollection, { DATA_COLLECTION } from "@/db";
 import { ObjectId } from "mongodb";
+import calcBasePay from "@/lib/calcFunctions/calcBasePay";
+import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
 
 export default async function updateMonth(formData: FormData): Promise<void> {
     const id = formData.get("id") as string;
     const month = formData.get("name") as string;
-    
-    // we create a dictionary of months with how many days they have
-    const months = {
-        "Jan": 31,
-        "Feb": 28,
-        "Mar": 31,
-        "Apr": 30,
-        "May": 31,
-        "Jun": 30,
-        "Jul": 31,
-        "Aug": 31,
-        "Sep": 30,
-        "Oct": 31,
-        "Nov": 30,
-        "Dec": 31,
-    };
 
     const collection = await getCollection(DATA_COLLECTION);
+    const person = await collection.findOne({ _id: new ObjectId(id) });
+    const salary = person?.salary;
+    const absences = person?.absences;
+    const year = person?.year;
+    const othours = person?.othours;
+    const weddinghours = person?.weddinghours;
+    const weddingpay = person?.weddingpay;
+    const bonusmultiplier = person?.bonusmultiplier;
+    const bonusvalue = person?.bonusvalue;
 
     const result = await collection.updateOne(
         { _id: new ObjectId(id) }, 
@@ -35,4 +30,16 @@ export default async function updateMonth(formData: FormData): Promise<void> {
     if (result.modifiedCount === 0) {
         throw new Error("Update failed: Employee not found.");
     }
+
+    const basepay = await calcBasePay(Number(salary), Number(absences), month, Number(year));
+    const result1 = await collection.updateOne(
+        { _id: new ObjectId(id) }, 
+        { $set: { basepay } }
+    );
+
+    const totalpay = await calcTotalPay(Number(salary), Number(othours), Number(weddinghours), Number(weddingpay), Number(bonusmultiplier), Number(bonusvalue), Number(absences), month, Number(year), Number(basepay));
+    const result2 = await collection.updateOne(
+        { _id: new ObjectId(id) }, 
+        { $set: { totalpay } }
+    );
 }

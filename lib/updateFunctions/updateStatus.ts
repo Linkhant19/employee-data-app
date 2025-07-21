@@ -12,7 +12,7 @@ export default async function updateStatus(formData: FormData): Promise<void> {
     const collection = await getCollection(DATA_COLLECTION);
 
     const result = await collection.updateOne(
-        { _id: new ObjectId(id) }, // because I am using ObjectId instead of string
+        { _id: new ObjectId(id) }, 
         { $set: { status } }
     );
 
