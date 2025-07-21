@@ -18,6 +18,7 @@ import UpdateStatusForm from "@/components/forms/update-status-form";
 import UpdateWeddingPayForm from "@/components/forms/update-weddingpay-form";
 import UpdateBonusMultiplierForm from "@/components/forms/update-bonusmultiplier-form";
 import UpdateBonusValueForm from "@/components/forms/update-bonusvalue-form";
+import UpdateYearForm from "@/components/forms/update-year-form";
 
 // update functions
 import updateName from "@/lib/updateFunctions/updateName";
@@ -30,6 +31,7 @@ import updateStatus from "@/lib/updateFunctions/updateStatus";
 import updateWeddingPay from "@/lib/updateFunctions/updateWeddingPay";
 import updateBonusMultiplier from "@/lib/updateFunctions/updateBonusMultiplier";
 import updateBonusValue from "@/lib/updateFunctions/updateBonusValue";
+import updateYear from "@/lib/updateFunctions/updateYear";
 
 // calc functions
 import calcBasePay from "@/lib/calcFunctions/calcBasePay";
@@ -49,6 +51,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
     const [showWeddingPayForm, setShowWeddingPayForm] = useState(false);
     const [showBonusMultiplierForm, setShowBonusMultiplierForm] = useState(false);
     const [showBonusValueForm, setShowBonusValueForm] = useState(false);
+    const [showYearForm, setShowYearForm] = useState(false);
 
     return (
         <StyledDiv0>
@@ -195,6 +198,20 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                             id={person.id} 
                             onSuccess={() => setShowBonusValueForm(false)}
                         />}   
+                />
+
+                {/* Year */}
+                <FieldToggle
+                    label="Year"
+                    value={person.year}
+                    showForm={showYearForm}
+                    toggle={() => setShowYearForm((prev) => !prev)}
+                    form={
+                        <UpdateYearForm 
+                            action={updateYear} 
+                            id={person.id} 
+                            onSuccess={() => setShowYearForm(false)} 
+                        />}
                 />
 
             </FieldsDiv>
