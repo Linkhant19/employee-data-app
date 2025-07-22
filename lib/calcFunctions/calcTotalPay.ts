@@ -17,7 +17,15 @@ const months : Record<string, number> = {
 };
 
 export default function calcTotalPay(salary: number, othours: number, weddinghours: number, weddingpay: number, bonusmultiplier: number, bonuspointsvalue: number, absences: number, month: string, year: number, basepay: number): number {
-    const numDays = months[month];
+    let numDays = months[month];
+
+    // check if it is a leap year
+    if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
+        if (month === "Feb") {
+            numDays = 29;
+        }
+    }
+    
     const daily = salary / numDays;
     const extra_time_pay = (daily / 9) * othours;
 
