@@ -34,8 +34,7 @@ export default async function addNewEmployee(
         bonusvalue: 0,
         basepay: 0,
         totalpay: 0,
-        month: "",
-        year: 0,
+        date: '00-0000',
         userId, 
     };
 

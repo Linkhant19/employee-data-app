@@ -15,8 +15,7 @@ export type EmployeeProps = {
     bonusvalue: number;
 
     // payroll month and year (not their employment date)
-    month: string;
-    year: number;
+    date: string;
 
     basepay: number;
     totalpay: number;
