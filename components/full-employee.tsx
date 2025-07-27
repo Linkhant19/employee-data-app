@@ -18,8 +18,8 @@ import UpdateStatusForm from "@/components/forms/update-status-form";
 import UpdateWeddingPayForm from "@/components/forms/update-weddingpay-form";
 import UpdateBonusMultiplierForm from "@/components/forms/update-bonusmultiplier-form";
 import UpdateBonusValueForm from "@/components/forms/update-bonusvalue-form";
-import UpdateMonthForm from "@/components/forms/update-month-form";
-import UpdateYearForm from "@/components/forms/update-year-form";
+import UpdateDateForm from "./forms/update-date-form";
+
 
 // update functions
 import updateName from "@/lib/updateFunctions/updateName";
@@ -32,8 +32,7 @@ import updateStatus from "@/lib/updateFunctions/updateStatus";
 import updateWeddingPay from "@/lib/updateFunctions/updateWeddingPay";
 import updateBonusMultiplier from "@/lib/updateFunctions/updateBonusMultiplier";
 import updateBonusValue from "@/lib/updateFunctions/updateBonusValue";
-import updateMonth from "@/lib/updateFunctions/updateMonth";
-import updateYear from "@/lib/updateFunctions/updateYear";
+import updateDate from "@/lib/updateFunctions/updateDate";
 
 // calc functions
 import calcBasePay from "@/lib/calcFunctions/calcBasePay";
@@ -53,8 +52,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
     const [showWeddingPayForm, setShowWeddingPayForm] = useState(false);
     const [showBonusMultiplierForm, setShowBonusMultiplierForm] = useState(false);
     const [showBonusValueForm, setShowBonusValueForm] = useState(false);
-    const [showMonthForm, setShowMonthForm] = useState(false);
-    const [showYearForm, setShowYearForm] = useState(false);
+    const [showDateForm, setShowDateForm] = useState(false);
 
     return (
         <StyledDiv0>
@@ -203,31 +201,17 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                         />}   
                 />
 
-                {/* Month */}
+                {/* Date */}
                 <FieldToggle
-                    label="Month"
-                    value={person.month}
-                    showForm={showMonthForm}
-                    toggle={() => setShowMonthForm((prev) => !prev)}
+                    label="Date"
+                    value={person.date}
+                    showForm={showDateForm}
+                    toggle={() => setShowDateForm((prev) => !prev)}
                     form={
-                        <UpdateMonthForm 
-                            action={updateMonth} 
+                        <UpdateDateForm 
+                            action={updateDate} 
                             id={person.id} 
-                            onSuccess={() => setShowMonthForm(false)}
-                        />}
-                />
-
-                {/* Year */}
-                <FieldToggle
-                    label="Year"
-                    value={person.year}
-                    showForm={showYearForm}
-                    toggle={() => setShowYearForm((prev) => !prev)}
-                    form={
-                        <UpdateYearForm 
-                            action={updateYear} 
-                            id={person.id} 
-                            onSuccess={() => setShowYearForm(false)} 
+                            onSuccess={() => setShowDateForm(false)}
                         />}
                 />
 
@@ -236,12 +220,12 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
             <FinalPayDiv>
                 {/* Base Pay calculated with calcBasePay */}
                 <p>
-                    <strong>Base Pay:</strong> {calcBasePay(person.salary, person.absences, person.month, person.year)}
+                    <strong>Base Pay:</strong> {calcBasePay(person.salary, person.absences, person.date)}
                 </p>
 
                 {/* Total Pay calculated with calcTotalPay */}
                 <p>
-                    <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.othours, person.weddinghours, person.weddingpay, person.bonusmultiplier, person.bonusvalue, person.absences, person.month, person.year, calcBasePay(person.salary, person.absences, person.month, person.year))}
+                    <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.othours, person.weddinghours, person.weddingpay, person.bonusmultiplier, person.bonusvalue, person.absences, person.date, calcBasePay(person.salary, person.absences, person.date))}
                 </p>
             </FinalPayDiv>
             

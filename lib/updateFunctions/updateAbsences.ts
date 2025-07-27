@@ -20,8 +20,7 @@ export default async function updateAbsences(formData: FormData): Promise<void> 
     const weddingpay = person?.weddingpay;
     const bonusmultiplier = person?.bonusmultiplier;
     const bonusvalue = person?.bonusvalue;
-    const month = person?.month;
-    const year = person?.year;
+    const date = person?.date;
 
     const result = await collection.updateOne(
         { _id: new ObjectId(id) }, // because I am using ObjectId instead of string
@@ -32,7 +31,7 @@ export default async function updateAbsences(formData: FormData): Promise<void> 
         throw new Error("Update failed: Employee not found.");
     }
 
-    const basepay = await calcBasePay(Number(salary), Number(absences), month, Number(year));
+    const basepay = await calcBasePay(Number(salary), Number(absences), date);
     const result1 = await collection.updateOne(
         { _id: new ObjectId(id) }, 
         { $set: { basepay } }
@@ -42,7 +41,7 @@ export default async function updateAbsences(formData: FormData): Promise<void> 
         throw new Error("Update failed: Employee not found.");
     }
 
-    const totalpay = await calcTotalPay(Number(salary), Number(othours), Number(weddinghours), Number(weddingpay), Number(bonusmultiplier), Number(bonusvalue), Number(absences), month, Number(year), Number(basepay));
+    const totalpay = await calcTotalPay(Number(salary), Number(othours), Number(weddinghours), Number(weddingpay), Number(bonusmultiplier), Number(bonusvalue), Number(absences), date, Number(basepay));
     const result2 = await collection.updateOne(
         { _id: new ObjectId(id) }, 
         { $set: { totalpay } }
