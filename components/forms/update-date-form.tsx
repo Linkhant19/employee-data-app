@@ -10,7 +10,7 @@ export default function UpdateDateForm({
     id,
     onSuccess,
 }: {
-    action: (formData: FormData) => Promise<void>;
+    action: (formData: FormData) => Promise<string>;
     id: string;
     onSuccess: () => void;
 }) {
@@ -18,10 +18,10 @@ export default function UpdateDateForm({
     const router = useRouter();
 
     async function handleSubmit(formData: FormData) {
-        await action(formData);
-        router.refresh(); 
-        setDate(""); 
-        onSuccess();    
+        const newId = await action(formData); 
+        setDate("");
+        onSuccess();
+        router.push(`/employees/${newId}`);  
     }
 
     return (

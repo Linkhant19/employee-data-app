@@ -37,9 +37,5 @@ export default async function updateBonusMultiplier(formData: FormData): Promise
         { _id: new ObjectId(id) }, 
         { $set: { totalpay } }
     );
-
-    if (result1.modifiedCount === 0) {
-        throw new Error("Update failed: Employee not found.");
-    }
     
 }

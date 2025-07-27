@@ -37,8 +37,4 @@ export default async function updateBonusValue(formData: FormData): Promise<void
         { $set: { totalpay } }
     );
 
-    if (result1.modifiedCount === 0) {
-        throw new Error("Update failed: Employee not found.");
-    }
-    
 }

@@ -37,10 +37,6 @@ export default async function updateAbsences(formData: FormData): Promise<void> 
         { $set: { basepay } }
     );
 
-    if (result1.modifiedCount === 0) {
-        throw new Error("Update failed: Employee not found.");
-    }
-
     const totalpay = await calcTotalPay(Number(salary), Number(othours), Number(weddinghours), Number(weddingpay), Number(bonusmultiplier), Number(bonusvalue), Number(absences), date, Number(basepay));
     const result2 = await collection.updateOne(
         { _id: new ObjectId(id) }, 
