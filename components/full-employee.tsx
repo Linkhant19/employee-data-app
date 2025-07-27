@@ -73,6 +73,42 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                         />}
                 />
 
+                {/* Status */}
+                <FieldToggle
+                    label="Status"
+                    value={person.status}
+                    showForm={showStatusForm}
+                    toggle={() => setShowStatusForm((prev) => !prev)}
+                    form={
+                        <UpdateStatusForm 
+                            action={updateStatus} 
+                            id={person.id} 
+                            onSuccess={() => setShowStatusForm(false)}
+                        />}
+                />
+
+                {/* Date */}
+                <FieldToggle
+                    label="Date"
+                    value={person.date}
+                    showForm={showDateForm}
+                    toggle={() => setShowDateForm((prev) => !prev)}
+                    form={
+                        <UpdateDateForm 
+                            action={updateDate} 
+                            id={person.id} 
+                            onSuccess={() => setShowDateForm(false)}
+                        />}
+                />
+
+                    
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <p>*please update date field first!</p>
+
                 {/* Salary */}
                 <FieldToggle
                     label="Salary"
@@ -103,8 +139,8 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                 />
 
 
-                {/* OT Days */}
-                <FieldToggle
+                {/* OT Days. Let's see for now if we need it */}
+                {/* <FieldToggle
                     label="OT Days"
                     value={person.otdays}
                     showForm={showOtDaysForm}
@@ -115,7 +151,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                             id={person.id} 
                             onSuccess={() => setShowOtDaysForm(false)}
                         />}
-                />
+                /> */}
 
                 {/* OT Hours */}
                 <FieldToggle
@@ -142,20 +178,6 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                             action={updateWeddingHours} 
                             id={person.id} 
                             onSuccess={() => setShowWeddingHoursForm(false)}
-                        />}
-                />
-
-                {/* Status */}
-                <FieldToggle
-                    label="Status"
-                    value={person.status}
-                    showForm={showStatusForm}
-                    toggle={() => setShowStatusForm((prev) => !prev)}
-                    form={
-                        <UpdateStatusForm 
-                            action={updateStatus} 
-                            id={person.id} 
-                            onSuccess={() => setShowStatusForm(false)}
                         />}
                 />
 
@@ -201,19 +223,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
                         />}   
                 />
 
-                {/* Date */}
-                <FieldToggle
-                    label="Date"
-                    value={person.date}
-                    showForm={showDateForm}
-                    toggle={() => setShowDateForm((prev) => !prev)}
-                    form={
-                        <UpdateDateForm 
-                            action={updateDate} 
-                            id={person.id} 
-                            onSuccess={() => setShowDateForm(false)}
-                        />}
-                />
+                
 
             </FieldsDiv>
 

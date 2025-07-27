@@ -3,44 +3,64 @@
 "use server";
 
 import getCollection, { DATA_COLLECTION } from "@/db";
+import { EmployeeProps } from "@/types";
 import { ObjectId } from "mongodb";
 import calcBasePay from "@/lib/calcFunctions/calcBasePay";
 import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
 
-export default async function updateDate(formData: FormData): Promise<void> {
+import { getServerSession } from "next-auth";
+import { getAuthOptions } from "@/lib/authOptions";
+
+export default async function updateDate(formData: FormData): Promise<string> {
     const id = formData.get("id") as string;
     const date = formData.get("date") as string;
 
     const collection = await getCollection(DATA_COLLECTION);
     const person = await collection.findOne({ _id: new ObjectId(id) });
-    const salary = person?.salary;
-    const absences = person?.absences;
-    const othours = person?.othours;
-    const weddinghours = person?.weddinghours;
-    const weddingpay = person?.weddingpay;
-    const bonusmultiplier = person?.bonusmultiplier;
-    const bonusvalue = person?.bonusvalue;
+    const {
+        employeeId,
+        name,
+        salary,
+        status,
+    } = person as unknown as EmployeeProps;
 
-    const result = await collection.updateOne(
-        { _id: new ObjectId(id) }, 
-        { $set: { date } }
-    );
+    const existing = await collection.findOne({ employeeId, date: date });
 
-    if (result.modifiedCount === 0) {
-        throw new Error("Update failed: Employee not found.");
+    const session = await getServerSession(await getAuthOptions());
+    if (!session?.user?.id) {
+        throw new Error("Unauthorized");
     }
 
-    const basepay = await calcBasePay(Number(salary), Number(absences), date);
+    const absences = 0;
+    const othours = 0;
+    const weddinghours = 0;
+    const weddingpay = 0;
+    const bonusmultiplier = 0;
+    const bonusvalue = 0;
 
-    const result1 = await collection.updateOne(
-        { _id: new ObjectId(id) }, 
-        { $set: { basepay } }
-    );
+    const basepay = await calcBasePay(salary, absences, date);
+    const totalpay = await calcTotalPay(salary, othours, weddinghours, weddingpay, bonusmultiplier, bonusvalue, absences, date, basepay);
 
-    const totalpay = await calcTotalPay(Number(salary), Number(othours), Number(weddinghours), Number(weddingpay), Number(bonusmultiplier), Number(bonusvalue), Number(absences), date, Number(basepay));
-        
-    const result2 = await collection.updateOne(
-        { _id: new ObjectId(id) }, 
-        { $set: { totalpay } }
-    );
+    const newDoc = {
+        name,
+        employeeId,
+        salary,
+        status,
+        date: date,
+        absences,
+        otdays: 0,
+        othours,
+        weddinghours,
+        weddingpay,
+        bonusmultiplier,
+        bonusvalue,
+        basepay,
+        totalpay,
+        userId: session.user.id
+    };
+
+    const result = await collection.insertOne(newDoc);
+    if (!result.insertedId) throw new Error("Insert failed");
+
+    return result.insertedId.toHexString();
 }
