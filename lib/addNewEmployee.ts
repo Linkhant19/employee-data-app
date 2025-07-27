@@ -6,6 +6,7 @@ import getCollection, { DATA_COLLECTION } from "@/db";
 import { EmployeeProps } from "@/types";
 import { getServerSession } from "next-auth";
 import { getAuthOptions } from "@/lib/authOptions";
+import { randomUUID } from "crypto";
 
 export default async function addNewEmployee(
     name: string,
@@ -21,6 +22,7 @@ export default async function addNewEmployee(
 
     const e = {
         name,
+        employeeId: randomUUID(), // we want to randomly generate a RFC 4122 version 4 UUID
         salary,
         absences: 0,
         otdays: 0,

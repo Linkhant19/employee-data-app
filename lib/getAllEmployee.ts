@@ -10,6 +10,7 @@ export default async function getAllEmployee(userId: string): Promise<EmployeePr
   
     const employees: EmployeeProps[] = data.map((e) => ({
         id: e._id.toHexString(),
+        employeeId: e.employeeId,
         name: e.name,
         salary: e.salary,
         absences: e.absences,

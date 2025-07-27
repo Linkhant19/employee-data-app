@@ -6,12 +6,9 @@ import Header from "@/components/header";
 
 import { getServerSession } from "next-auth";
 import { getAuthOptions } from "@/lib/authOptions"; 
-import Head from "next/head";
 
 export default async function Home() {
   const session = await getServerSession(await getAuthOptions()); 
-  console.log("SESSION:", session);
-  console.log("USER ID:", session?.user?.id);
 
   if (!session?.user?.id) {
     return (
