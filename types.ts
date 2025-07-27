@@ -2,6 +2,7 @@
 
 export type EmployeeProps = {
     id: string;
+    employeeId: string;
     name: string;
     salary: number;
     absences: number;

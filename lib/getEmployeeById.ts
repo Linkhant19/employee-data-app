@@ -19,6 +19,7 @@ export default async function getEmployeeById(
   
     const employee: EmployeeProps = {
         id,
+        employeeId: data.employeeId,
         name: data.name,
         salary: data.salary,
         absences: data.absences,
