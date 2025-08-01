@@ -37,7 +37,7 @@ export default function calcBasePay(salary: number, absences: number, date: stri
         
     const dailyRate = salary / numDays;
     const num = salary - ((absences - 3) * dailyRate);
-    const s = num.toFixed(2);
+    const s = num.toFixed(0);
 
     return Number(s);
 }

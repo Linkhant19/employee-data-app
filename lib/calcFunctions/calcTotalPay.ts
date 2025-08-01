@@ -44,7 +44,7 @@ export default function calcTotalPay(salary: number, othours: number, weddinghou
     const bonus_pay = ((bonus_points * bonuspointsvalue) / numDays) * (days_worked + 3);
 
     const num = basepay + extra_time_pay + wedding_pay + bonus_pay;
-    const s = num.toFixed(2);
+    const s = num.toFixed(0);
 
     return Number(s);
 }
