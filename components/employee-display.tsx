@@ -40,11 +40,11 @@ export default function EmployeeDisplay({ inputEmployees } : { inputEmployees: E
                 <StyledParagraph>Name</StyledParagraph>
                 <StyledParagraph>Salary</StyledParagraph>
                 <StyledParagraph>Absences</StyledParagraph>
-                <StyledParagraph>OT Days</StyledParagraph>
                 <StyledParagraph>OT Hours</StyledParagraph>
                 <StyledParagraph>Wedding Hours</StyledParagraph>
+                <StyledParagraph>Base Pay</StyledParagraph>
+                <StyledParagraph>Bonus Amount</StyledParagraph>
                 <StyledParagraph>Total Pay</StyledParagraph>
-                <StyledParagraph>Status</StyledParagraph>
             </TableDiv>
             
             <div>
