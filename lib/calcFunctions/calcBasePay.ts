@@ -27,7 +27,6 @@ export default function calcBasePay(salary: number, absences: number, date: stri
     const year = date.split("-")[1];
     let numDays = months[month];
 
-    console.log("MONTH AND YEARRRRRRRRRRRR", month, year);
 
     // check if it is a leap year
     if (Number(year) % 4 === 0 && Number(year) % 100 !== 0 || Number(year) % 400 === 0) {

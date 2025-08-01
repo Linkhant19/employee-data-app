@@ -15,7 +15,7 @@ const StyledDiv = styled.div`
 
 const StyledParagraph = styled.p`
     width: 10%;
-    font-size: 1.3em;
+    font-size: 1em;
     margin: 0;
     text-align: center;
 `;
@@ -30,11 +30,11 @@ export default function EmployeePreview({ person }: { person: EmployeeProps }) {
                 <StyledParagraph>{person.name}</StyledParagraph>
                 <StyledParagraph>{person.salary}</StyledParagraph>
                 <StyledParagraph>{person.absences}</StyledParagraph>
-                <StyledParagraph>{person.otdays}</StyledParagraph>
                 <StyledParagraph>{person.othours}</StyledParagraph>
                 <StyledParagraph>{person.weddinghours}</StyledParagraph>
+                <StyledParagraph>{person.basepay}</StyledParagraph>  
+                <StyledParagraph>{person.bonusvalue * person.bonusmultiplier}</StyledParagraph>
                 <StyledParagraph>{person.totalpay}</StyledParagraph>
-                <StyledParagraph>{person.status}</StyledParagraph>
             </StyledDiv>     
         </Link>
     );
