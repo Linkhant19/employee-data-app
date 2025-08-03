@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { getBonusPointValue } from "@/lib/getBonusPointValue";
 import { getServerSession } from "next-auth";
 import { getAuthOptions } from "@/lib/authOptions"; 
+import getTotalBonusPoints from "@/lib/getTotalBonusPoints";
 
 export default async function FullEmployeePage({ params }: { params: { id: string } }) {
     const session = await getServerSession(await getAuthOptions()); 
@@ -25,9 +26,16 @@ export default async function FullEmployeePage({ params }: { params: { id: strin
             return redirect("/");
         }
 
+        const date = employee.date;
+        const totalBonusPoints = await getTotalBonusPoints(userId, date);
+
         return (
             <div>
-                <FullEmployee person={employee} bonusPointValue={bonusPointValue} />
+                <FullEmployee 
+                    person={employee} 
+                    bonusPointValue={bonusPointValue} 
+                    totalBonusPoints={totalBonusPoints}
+                />
             </div>
         );
     } catch (error) {

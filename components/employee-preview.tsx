@@ -32,8 +32,8 @@ export default function EmployeePreview({ person }: { person: EmployeeProps }) {
                 <StyledParagraph>{person.absences}</StyledParagraph>
                 <StyledParagraph>{person.othours}</StyledParagraph>
                 <StyledParagraph>{person.weddinghours}</StyledParagraph>
-                <StyledParagraph>{person.basepay}</StyledParagraph>  
-                <StyledParagraph>{person.bonusvalue * person.bonusmultiplier}</StyledParagraph>
+                <StyledParagraph>{String(person.basepay)}</StyledParagraph>  
+                <StyledParagraph>{person.totalpay - person.basepay}</StyledParagraph>
                 <StyledParagraph>{person.totalpay}</StyledParagraph>
             </StyledDiv>     
         </Link>

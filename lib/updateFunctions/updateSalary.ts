@@ -6,6 +6,7 @@ import getCollection, { DATA_COLLECTION } from "@/db";
 import { ObjectId } from "mongodb";
 import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
 import calcBasePay from "@/lib/calcFunctions/calcBasePay";
+import getTotalBonusPoints from "../getTotalBonusPoints";
 
 export default async function updateSalary(formData: FormData): Promise<void> {
     const id = formData.get("id") as string;
@@ -20,6 +21,9 @@ export default async function updateSalary(formData: FormData): Promise<void> {
     const bonusvalue = person?.bonusvalue;
     const absences = person?.absences;
     const date = person?.date;
+    const userId = person?.userId;
+
+    const totalbonuspoints = await getTotalBonusPoints(userId, date);
 
     const result = await collection.updateOne(
         { _id: new ObjectId(id) }, // because I am using ObjectId instead of string
@@ -37,7 +41,7 @@ export default async function updateSalary(formData: FormData): Promise<void> {
         { $set: { basepay } }
     );
 
-    const totalpay = await calcTotalPay(Number(salary), Number(bonusmultiplier), Number(bonusvalue), Number(absences), date, Number(basepay));
+    const totalpay = await calcTotalPay(Number(salary), Number(bonusmultiplier), Number(bonusvalue), Number(totalbonuspoints), Number(absences), date, Number(basepay));
             
     const result2 = await collection.updateOne(
         { _id: new ObjectId(id) }, 

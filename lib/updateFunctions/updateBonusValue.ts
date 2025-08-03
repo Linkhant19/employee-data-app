@@ -5,6 +5,7 @@
 import getCollection, { DATA_COLLECTION } from "@/db";
 import { ObjectId } from "mongodb";
 import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
+import getTotalBonusPoints from "../getTotalBonusPoints";
 
 export default async function updateBonusValue(formData: FormData): Promise<void> {
     const id = formData.get("id") as string;
@@ -20,6 +21,9 @@ export default async function updateBonusValue(formData: FormData): Promise<void
     const absences = person?.absences;
     const basepay = person?.basepay;
     const date = person?.date;
+    const userId = person?.userId;
+
+    const totalbonuspoints = await getTotalBonusPoints(userId, date);
 
     const result = await collection.updateOne(
         { _id: new ObjectId(id) }, 
@@ -30,7 +34,7 @@ export default async function updateBonusValue(formData: FormData): Promise<void
         throw new Error("Update failed: Employee not found.");
     }
 
-    const totalpay = await calcTotalPay(Number(salary), Number(bonusmultiplier), Number(bonusvalue), Number(absences), date, Number(basepay));
+    const totalpay = await calcTotalPay(Number(salary), Number(bonusmultiplier), Number(bonusvalue), Number(totalbonuspoints), Number(absences), date, Number(basepay));
     
     const result1 = await collection.updateOne(
         { _id: new ObjectId(id) }, 

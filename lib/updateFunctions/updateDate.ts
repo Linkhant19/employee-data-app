@@ -37,9 +37,10 @@ export default async function updateDate(formData: FormData): Promise<string> {
     const weddingpay = 0;
     const bonusmultiplier = person?.bonusmultiplier;
     const bonusvalue = 0;
+    const totalbonuspoints = 0;
 
     const basepay = await calcBasePay(salary, absences, date, othours, weddinghours, weddingpay);
-    const totalpay = await calcTotalPay(salary, bonusmultiplier, bonusvalue, absences, date, basepay);
+    const totalpay = await calcTotalPay(salary, bonusmultiplier, bonusvalue, totalbonuspoints, absences, date, basepay);
 
     const newDoc = {
         name,

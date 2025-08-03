@@ -1,5 +1,7 @@
 // lib/calcFunctions/calcTotalPay.ts
 
+import getCollection, { DATA_COLLECTION } from "@/db";
+
 // we create a dictionary of months with how many days they have
 const months : Record<string, number> = {
     "01": 31,
@@ -16,7 +18,7 @@ const months : Record<string, number> = {
     "12": 31
 };
 
-export default function calcTotalPay(salary: number, bonusmultiplier: number, bonuspointsvalue: number, absences: number, date: string, basepay: number): number {
+export default function calcTotalPay(salary: number, bonusmultiplier: number, bonuspointsvalue: number, totalbonuspoints: number, absences: number, date: string, basepay: number): number {
     // if date is null, default month 01 and year 2025
     if (!date) {
         date = "01-2025";
@@ -37,8 +39,12 @@ export default function calcTotalPay(salary: number, bonusmultiplier: number, bo
     const daily = salary / numDays;
 
     const days_worked = (numDays - absences);
+
     const bonus_points = (salary / 100) * bonusmultiplier;
-    const bonus_pay = ((bonus_points * bonuspointsvalue) / numDays) * (days_worked + 3);
+
+    const one_point_value = bonuspointsvalue / totalbonuspoints;
+
+    const bonus_pay = ((bonus_points * one_point_value) / numDays) * (days_worked + 3);
 
     const num = basepay + bonus_pay;
     const s = num.toFixed(0);

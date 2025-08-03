@@ -40,8 +40,9 @@ import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
 
 // our styles
 import { StyledLink, FieldsDiv, StyledDiv0, StyledDiv2, StyledDiv3, FinalPayDiv } from "@/components/styles/styled-components";
+import getTotalBonusPoints from "@/lib/getTotalBonusPoints";
 
-export default function FullEmployee({ person, bonusPointValue }: { person: EmployeeProps, bonusPointValue: number }) {
+export default function FullEmployee({ person, bonusPointValue, totalBonusPoints }: { person: EmployeeProps, bonusPointValue: number, totalBonusPoints: number }) {
     const [showNameForm, setShowNameForm] = useState(false);
     const [showSalaryForm, setShowSalaryForm] = useState(false);
     const [showAbsencesForm, setShowAbsencesForm] = useState(false);
@@ -235,7 +236,7 @@ export default function FullEmployee({ person, bonusPointValue }: { person: Empl
 
                 {/* Total Pay calculated with calcTotalPay */}
                 <p>
-                    <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.bonusmultiplier, person.bonusvalue, person.absences, person.date, calcBasePay(person.salary, person.absences, person.date, person.othours, person.weddinghours, person.weddingpay))}
+                    <strong>Total Pay:</strong> {calcTotalPay(person.salary, person.bonusmultiplier, person.bonusvalue, totalBonusPoints, person.absences, person.date, calcBasePay(person.salary, person.absences, person.date, person.othours, person.weddinghours, person.weddingpay))}
                 </p>
             </FinalPayDiv>
 
