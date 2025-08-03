@@ -6,6 +6,7 @@ import getCollection, { DATA_COLLECTION } from "@/db";
 import { ObjectId } from "mongodb";
 import calcBasePay from "@/lib/calcFunctions/calcBasePay";
 import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
+import getTotalBonusPoints from "../getTotalBonusPoints";
 
 export default async function updateAbsences(formData: FormData): Promise<void> {
     const id = formData.get("id") as string;
@@ -21,6 +22,9 @@ export default async function updateAbsences(formData: FormData): Promise<void> 
     const bonusmultiplier = person?.bonusmultiplier;
     const bonusvalue = person?.bonusvalue;
     const date = person?.date;
+    const userId = person?.userId;
+
+    const totalbonuspoints = await getTotalBonusPoints(userId, date);
 
     const result = await collection.updateOne(
         { _id: new ObjectId(id) }, // because I am using ObjectId instead of string
@@ -31,13 +35,15 @@ export default async function updateAbsences(formData: FormData): Promise<void> 
         throw new Error("Update failed: Employee not found.");
     }
 
-    const basepay = await calcBasePay(Number(salary), Number(absences), date);
+    const basepay = await calcBasePay(Number(salary), Number(absences), date, Number(othours), Number(weddinghours), Number(weddingpay));
     const result1 = await collection.updateOne(
         { _id: new ObjectId(id) }, 
         { $set: { basepay } }
     );
 
-    const totalpay = await calcTotalPay(Number(salary), Number(othours), Number(weddinghours), Number(weddingpay), Number(bonusmultiplier), Number(bonusvalue), Number(absences), date, Number(basepay));
+    console.log("ABSENCES TOTAL BONUS POINTS:", totalbonuspoints);
+    const totalpay = await calcTotalPay(Number(salary), Number(bonusmultiplier), Number(bonusvalue), Number(totalbonuspoints), Number(absences), date, Number(basepay));
+    console.log("ABSENCES TOTAL PAY:", totalpay);
     const result2 = await collection.updateOne(
         { _id: new ObjectId(id) }, 
         { $set: { totalpay } }

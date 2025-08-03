@@ -16,7 +16,7 @@ const months : Record<string, number> = {
     "12": 31
 };
 
-export default function calcBasePay(salary: number, absences: number, date: string): number {
+export default function calcBasePay(salary: number, absences: number, date: string, othours: number, weddinghours: number, weddingpay: number): number {
     // if date is null, default month 01 and year 2025
     if (!date) {
         date = "01-2025";
@@ -36,7 +36,10 @@ export default function calcBasePay(salary: number, absences: number, date: stri
     }
         
     const dailyRate = salary / numDays;
-    const num = salary - ((absences - 3) * dailyRate);
+    const extra_time_pay = (dailyRate / 9) * othours;
+    const wedding_pay = weddinghours * weddingpay;
+    const num = salary - ((absences - 3) * dailyRate) + (extra_time_pay + wedding_pay);
+
     const s = num.toFixed(0);
 
     return Number(s);
