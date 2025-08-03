@@ -30,14 +30,14 @@ export default async function updateSalary(formData: FormData): Promise<void> {
         throw new Error("Update failed: Employee not found.");
     }
 
-    const basepay = await calcBasePay(Number(salary), Number(absences), date);
+    const basepay = await calcBasePay(Number(salary), Number(absences), date, Number(othours), Number(weddinghours), Number(weddingpay));
 
     const result1 = await collection.updateOne(
         { _id: new ObjectId(id) }, 
         { $set: { basepay } }
     );
 
-    const totalpay = await calcTotalPay(Number(salary), Number(othours), Number(weddinghours), Number(weddingpay), Number(bonusmultiplier), Number(bonusvalue), Number(absences), date, Number(basepay));
+    const totalpay = await calcTotalPay(Number(salary), Number(bonusmultiplier), Number(bonusvalue), Number(absences), date, Number(basepay));
             
     const result2 = await collection.updateOne(
         { _id: new ObjectId(id) }, 
