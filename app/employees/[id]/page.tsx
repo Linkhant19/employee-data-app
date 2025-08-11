@@ -2,6 +2,7 @@
 
 import FullEmployee from "@/components/full-employee";
 import getEmployeeById from "@/lib/getEmployeeById";
+import getEmployeeHistory from "@/lib/getEmployeeHistory";
 import { redirect } from "next/navigation";
 import { getBonusPointValue } from "@/lib/getBonusPointValue";
 import { getServerSession } from "next-auth";
@@ -23,8 +24,10 @@ export default async function FullEmployeePage({ params }: { params: { id: strin
         const employee = await getEmployeeById(param.id, userId);
 
         if (!employee) {
-            return redirect("/");
+            return <p>NOOOO Employee</p>
         }
+
+        const history = await getEmployeeHistory(employee.employeeId);
 
         const date = employee.date;
         const totalBonusPoints = await getTotalBonusPoints(userId, date);
@@ -35,6 +38,7 @@ export default async function FullEmployeePage({ params }: { params: { id: strin
                     person={employee} 
                     bonusPointValue={bonusPointValue} 
                     totalBonusPoints={totalBonusPoints}
+                    history={history}
                 />
             </div>
         );
