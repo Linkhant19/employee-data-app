@@ -42,7 +42,7 @@ import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
 import { StyledLink, FieldsDiv, StyledDiv0, StyledDiv2, StyledDiv3, FinalPayDiv } from "@/components/styles/styled-components";
 import getTotalBonusPoints from "@/lib/getTotalBonusPoints";
 
-export default function FullEmployee({ person, bonusPointValue, totalBonusPoints }: { person: EmployeeProps, bonusPointValue: number, totalBonusPoints: number }) {
+export default function FullEmployee({ person, bonusPointValue, totalBonusPoints, history }: { person: EmployeeProps, bonusPointValue: number, totalBonusPoints: number, history: { id: string; date: string; totalpay: number }[] }) {
     const [showNameForm, setShowNameForm] = useState(false);
     const [showSalaryForm, setShowSalaryForm] = useState(false);
     const [showAbsencesForm, setShowAbsencesForm] = useState(false);
@@ -224,8 +224,6 @@ export default function FullEmployee({ person, bonusPointValue, totalBonusPoints
                         />}   
                 />
 
-                
-
             </FieldsDiv>
 
             <FinalPayDiv>
@@ -242,7 +240,14 @@ export default function FullEmployee({ person, bonusPointValue, totalBonusPoints
 
             {/* we will display the all other date + total pay for each entry with this employeeId */}
             <div>
-                
+                <h2>History</h2>
+                <ul>
+                    {history.map(entry => (
+                        <li key={entry.id}>
+                            {entry.date} — <strong>{entry.totalpay}</strong>
+                        </li>
+                    ))}
+                </ul>
             </div>
             
         </StyledDiv0>
