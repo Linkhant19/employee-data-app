@@ -3,7 +3,7 @@
 "use client";
 
 import { EmployeeProps } from "@/types";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import EmployeePreview from "./employee-preview";
 import NewEmployeeForm from "./new-employee-form";
 import styled from "styled-components";
@@ -30,12 +30,49 @@ const StyledParagraph = styled.p`
 
 export default function EmployeeDisplay({ inputEmployees } : { inputEmployees: EmployeeProps[] }) {
     const [employees, setEmployees] = useState(inputEmployees);
+    const [dateFilter, setDateFilter] = useState<string>(""); // I would expect like a "07-2025"
+
+    // We will build a distinct list of dates that exist in the data to power the dropdown
+    // using this method since we are not expecting a lot of data entry
+    // if we have to scale, we can look into server-side filtering
+    const availableDates = useMemo(
+        () => Array.from(new Set(employees.map(e => e.date).filter(Boolean))).sort(),
+        [employees]
+    );
+
+    const filtered = useMemo(() => {
+        if (!dateFilter) return employees;
+        return employees.filter(e => e.date === dateFilter);
+    }, [employees, dateFilter]);
+    
 
     return (
         <div>
+            <div style={{ display: "flex", gap: 12, alignItems: "center", margin: "16px 20px" }}>
+                <label>
+                <span style={{ marginRight: 8, fontWeight: 600 }}>Filter by month:</span>
+                <select
+                    value={dateFilter}
+                    onChange={(e) => setDateFilter(e.target.value)}
+                    style={{ padding: 6 }}
+                >
+                    <option value="">All</option>
+                    {availableDates.map(d => (
+                    <option key={d} value={d}>{d}</option>
+                    ))}
+                </select>
+                </label>
+                {dateFilter && (
+                <button onClick={() => setDateFilter("")} style={{ padding: "6px 10px", cursor: "pointer" }}>
+                    Clear
+                </button>
+                )}
+            </div>
+
             <NewEmployeeForm 
                 append={(newEmployee: EmployeeProps) => setEmployees([...employees, newEmployee])} 
             />
+
             <TableDiv>
                 <StyledParagraph>Name</StyledParagraph>
                 <StyledParagraph>Salary</StyledParagraph>
@@ -48,9 +85,12 @@ export default function EmployeeDisplay({ inputEmployees } : { inputEmployees: E
             </TableDiv>
             
             <div>
-                {employees.map((employee) => (
+                {filtered.map((employee) => (
                     <EmployeePreview key={employee.id} person={employee} />
                 ))}
+                {filtered.length === 0 && (
+                    <p style={{ margin: 20 }}>No entries for {dateFilter}.</p>
+                )}
             </div>
         </div>
     );
