@@ -14,8 +14,6 @@ export default async function updateWeddingHours(formData: FormData): Promise<vo
     const collection = await getCollection(DATA_COLLECTION);
     const person = await collection.findOne({ _id: new ObjectId(id) });
     const salary = person?.salary;
-    const othours = person?.othours;
-    const weddingpay = person?.weddingpay;
     const bonusmultiplier = person?.bonusmultiplier;
     const bonusvalue = person?.bonusvalue;
     const absences = person?.absences;
@@ -36,7 +34,7 @@ export default async function updateWeddingHours(formData: FormData): Promise<vo
 
     const totalpay = await calcTotalPay(Number(salary), Number(bonusmultiplier), Number(bonusvalue), Number(totalbonuspoints), Number(absences), date, Number(basepay));
 
-    const result1 = await collection.updateOne(
+    await collection.updateOne(
         { _id: new ObjectId(id) }, 
         { $set: { totalpay } }
     )  

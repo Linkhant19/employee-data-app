@@ -10,6 +10,7 @@ import { randomUUID } from "crypto";
 
 export default async function addNewEmployee(
     name: string,
+    date: string,
     salary: number
 ): Promise<EmployeeProps> {
     const session = await getServerSession(await getAuthOptions());
@@ -34,7 +35,7 @@ export default async function addNewEmployee(
         bonusvalue: 0,
         basepay: 0,
         totalpay: 0,
-        date: '00-0000',
+        date,
         userId, 
     };
 
