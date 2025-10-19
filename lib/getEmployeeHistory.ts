@@ -2,7 +2,6 @@
 "use server";
 
 import getCollection, { DATA_COLLECTION } from "@/db";
-import { ObjectId } from "mongodb";
 
 export default async function getEmployeeHistory(employeeId: string) {
     const collection = await getCollection(DATA_COLLECTION);

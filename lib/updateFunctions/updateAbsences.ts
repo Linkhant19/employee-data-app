@@ -36,7 +36,7 @@ export default async function updateAbsences(formData: FormData): Promise<void> 
     }
 
     const basepay = await calcBasePay(Number(salary), Number(absences), date, Number(othours), Number(weddinghours), Number(weddingpay));
-    const result1 = await collection.updateOne(
+    await collection.updateOne(
         { _id: new ObjectId(id) }, 
         { $set: { basepay } }
     );
@@ -44,7 +44,7 @@ export default async function updateAbsences(formData: FormData): Promise<void> 
     console.log("ABSENCES TOTAL BONUS POINTS:", totalbonuspoints);
     const totalpay = await calcTotalPay(Number(salary), Number(bonusmultiplier), Number(bonusvalue), Number(totalbonuspoints), Number(absences), date, Number(basepay));
     console.log("ABSENCES TOTAL PAY:", totalpay);
-    const result2 = await collection.updateOne(
+    await collection.updateOne(
         { _id: new ObjectId(id) }, 
         { $set: { totalpay } }
     );

@@ -11,7 +11,6 @@ import { EmployeeProps } from "@/types";
 import UpdateNameForm from "@/components/forms/update-name-form";
 import UpdateSalaryForm from "@/components/forms/update-salary-form";
 import UpdateAbsencesForm from "@/components/forms/update-absences-form";
-import UpdateOtDaysForm from "@/components/forms/update-otdays-form";
 import UpdateOtHoursForm from "@/components/forms/update-othours-form";
 import UpdateWeddingHoursForm from "@/components/forms/update-weddinghours-form";
 import UpdateStatusForm from "@/components/forms/update-status-form";
@@ -25,7 +24,6 @@ import UpdateDateForm from "./forms/update-date-form";
 import updateName from "@/lib/updateFunctions/updateName";
 import updateSalary from "@/lib/updateFunctions/updateSalary";
 import updateAbsences from "@/lib/updateFunctions/updateAbsences";
-import updateOtDays from "@/lib/updateFunctions/updateOtdays";
 import updateOtHours from "@/lib/updateFunctions/updateOthours";
 import updateWeddingHours from "@/lib/updateFunctions/updateWeddingHours";
 import updateStatus from "@/lib/updateFunctions/updateStatus";
@@ -40,13 +38,11 @@ import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
 
 // our styles
 import { StyledLink, FieldsDiv, StyledDiv0, StyledDiv2, StyledDiv3, FinalPayDiv } from "@/components/styles/styled-components";
-import getTotalBonusPoints from "@/lib/getTotalBonusPoints";
 
-export default function FullEmployee({ person, bonusPointValue, totalBonusPoints, history }: { person: EmployeeProps, bonusPointValue: number, totalBonusPoints: number, history: { id: string; date: string; totalpay: number }[] }) {
+export default function FullEmployee({ person, totalBonusPoints, history }: { person: EmployeeProps, bonusPointValue: number, totalBonusPoints: number, history: { id: string; date: string; totalpay: number }[] }) {
     const [showNameForm, setShowNameForm] = useState(false);
     const [showSalaryForm, setShowSalaryForm] = useState(false);
     const [showAbsencesForm, setShowAbsencesForm] = useState(false);
-    const [showOtDaysForm, setShowOtDaysForm] = useState(false);
     const [showOtHoursForm, setShowOtHoursForm] = useState(false);
     const [showWeddingHoursForm, setShowWeddingHoursForm] = useState(false);
     const [showStatusForm, setShowStatusForm] = useState(false);

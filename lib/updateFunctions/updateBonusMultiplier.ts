@@ -14,9 +14,6 @@ export default async function updateBonusMultiplier(formData: FormData): Promise
     const collection = await getCollection(DATA_COLLECTION);
     const person = await collection.findOne({ _id: new ObjectId(id) });
     const salary = person?.salary;
-    const othours = person?.othours;
-    const weddinghours = person?.weddinghours;
-    const weddingpay = person?.weddingpay;
     const bonusvalue = person?.bonusvalue;
     const absences = person?.absences;
     const basepay = person?.basepay;

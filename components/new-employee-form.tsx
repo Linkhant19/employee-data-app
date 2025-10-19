@@ -9,12 +9,13 @@ import { StyledTextField, TextFieldDiv, AddButton } from "./styles/styled-compon
 
 export default function NewEmployeeForm({append}: {append: (data: EmployeeProps) => void}) {
     const [name, setName] = useState("");
+    const [date, setDate] = useState("");
     const [salary, setSalary] = useState(0);
 
     return (
         <form onSubmit={async (event) => {
             event.preventDefault();
-            addNewEmployee(name, salary)
+            addNewEmployee(name, date, salary)
                 .then((newEmployee) => append(newEmployee))
                 .catch((err) => console.error(err));
         }}>
@@ -26,6 +27,14 @@ export default function NewEmployeeForm({append}: {append: (data: EmployeeProps)
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
+
+                <StyledTextField
+                    id="date"
+                    label="Date"
+                    variant="outlined"
+                    onChange={(event) => setDate(event.target.value)}
+                />
+
                 <StyledTextField
                     id="salary"
                     label="Salary"
