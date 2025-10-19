@@ -39,7 +39,7 @@ import calcTotalPay from "@/lib/calcFunctions/calcTotalPay";
 // our styles
 import { StyledLink, FieldsDiv, StyledDiv0, StyledDiv2, StyledDiv3, FinalPayDiv } from "@/components/styles/styled-components";
 
-export default function FullEmployee({ person, totalBonusPoints, history }: { person: EmployeeProps, bonusPointValue: number, totalBonusPoints: number, history: { id: string; date: string; totalpay: number }[] }) {
+export default function FullEmployee({ person, totalBonusPoints, history }: { person: EmployeeProps, totalBonusPoints: number, history: { id: string; date: string; totalpay: number }[] }) {
     const [showNameForm, setShowNameForm] = useState(false);
     const [showSalaryForm, setShowSalaryForm] = useState(false);
     const [showAbsencesForm, setShowAbsencesForm] = useState(false);
@@ -134,21 +134,6 @@ export default function FullEmployee({ person, totalBonusPoints, history }: { pe
                         />
                     }
                 />
-
-
-                {/* OT Days. Let's see for now if we need it */}
-                {/* <FieldToggle
-                    label="OT Days"
-                    value={person.otdays}
-                    showForm={showOtDaysForm}
-                    toggle={() => setShowOtDaysForm((prev) => !prev)}
-                    form={
-                        <UpdateOtDaysForm 
-                            action={updateOtDays} 
-                            id={person.id} 
-                            onSuccess={() => setShowOtDaysForm(false)}
-                        />}
-                /> */}
 
                 {/* OT Hours */}
                 <FieldToggle
