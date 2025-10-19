@@ -1,7 +1,5 @@
 // lib/calcFunctions/calcTotalPay.ts
 
-import getCollection, { DATA_COLLECTION } from "@/db";
-
 // we create a dictionary of months with how many days they have
 const months : Record<string, number> = {
     "01": 31,
@@ -35,8 +33,6 @@ export default function calcTotalPay(salary: number, bonusmultiplier: number, bo
             numDays = 29;
         }
     }
-
-    const daily = salary / numDays;
 
     const days_worked = (numDays - absences);
 

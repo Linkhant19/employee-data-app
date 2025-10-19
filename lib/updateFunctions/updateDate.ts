@@ -24,7 +24,7 @@ export default async function updateDate(formData: FormData): Promise<string> {
         status,
     } = person as unknown as EmployeeProps;
 
-    const existing = await collection.findOne({ employeeId, date: date });
+    await collection.findOne({ employeeId, date: date });
 
     const session = await getServerSession(await getAuthOptions());
     if (!session?.user?.id) {
