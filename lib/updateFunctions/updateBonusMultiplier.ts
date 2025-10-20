@@ -33,7 +33,7 @@ export default async function updateBonusMultiplier(formData: FormData): Promise
 
     const totalpay = await calcTotalPay(Number(salary), Number(bonusmultiplier), Number(bonusvalue), Number(totalbonuspoints), Number(absences), date, Number(basepay));
 
-    const result1 = await collection.updateOne(
+    await collection.updateOne(
         { _id: new ObjectId(id) }, 
         { $set: { totalpay } }
     );

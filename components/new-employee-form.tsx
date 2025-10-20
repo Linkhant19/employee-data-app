@@ -30,7 +30,7 @@ export default function NewEmployeeForm({append}: {append: (data: EmployeeProps)
 
                 <StyledTextField
                     id="date"
-                    label="Date"
+                    label="MM-YYYY"
                     variant="outlined"
                     onChange={(event) => setDate(event.target.value)}
                 />
